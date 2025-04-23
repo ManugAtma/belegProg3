@@ -1,9 +1,11 @@
+package automat;
+
 import verwaltung.Hersteller;
 
 import java.util.Objects;
 
 public class HerstellerImpl implements Hersteller {
-    private String name;
+    private final String name;
 
     public HerstellerImpl(String name) {
         this.name = name;

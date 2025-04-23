@@ -1,3 +1,5 @@
+package automat;
+
 import kuchen.Allergen;
 import kuchen.Kuchen;
 import verwaltung.Hersteller;
@@ -14,6 +16,8 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
     Date inspektionsdatum;
     int fachnummer;
 
+    Date einfuegedatum;
+
     Hersteller hersteller;
     Collection<Allergen> allergene;
     int naehrwert;
@@ -24,13 +28,11 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
     }
 
     // setter verwenden
-    public AbstractKuchen(BigDecimal preis, Date inspektionsdatum,
-                          int fachnummer, Hersteller hersteller,
-                          Collection<Allergen> allergene,
+    public AbstractKuchen(BigDecimal preis, int fachnummer,
+                          Hersteller hersteller, Collection<Allergen> allergene,
                           int naehrwert, Duration haltbarkeit) {
         this.preis = preis;
-        this.inspektionsdatum = inspektionsdatum;
-        this.fachnummer = -1;  // TODO!!!
+        this.fachnummer = -1;  // noch kein Fach zugewiesen
         this.hersteller = hersteller;
         this.allergene = allergene;
         this.naehrwert = naehrwert;
@@ -88,6 +90,7 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
     public String toString() {
         return getClass().getSimpleName() + " (" +
                 "fachnummer: " + fachnummer +
+                ", einfuegedatum: " + einfuegedatum +
                 ", preis: " + preis +
                 ", inspektionsdatum: " + inspektionsdatum +
                 ", hersteller: " + (hersteller != null ? hersteller.getName() : "null") +
@@ -96,8 +99,6 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
                 ", haltbarkeit: " + haltbarkeit +
                 ')';
     }
-
-
 
     // keine setter einfuegedatum und haltbarkeit,da unveränderbar?
 }

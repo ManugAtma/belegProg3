@@ -1,12 +1,12 @@
+package automat;
+
 import kuchen.Allergen;
-import kuchen.Kremkuchen;
 import kuchen.Obstkuchen;
 import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
-import java.util.Date;
 
 public class ObstkuchenImpl extends AbstractKuchen implements Obstkuchen {
 
@@ -14,12 +14,11 @@ public class ObstkuchenImpl extends AbstractKuchen implements Obstkuchen {
 
     public ObstkuchenImpl(){}
 
-    public ObstkuchenImpl(BigDecimal preis, Date inspektionsdatum,
-                          int fachnummer, Hersteller hersteller,
+    public ObstkuchenImpl(BigDecimal preis, int fachnummer, Hersteller hersteller,
                           Collection<Allergen> allergene, int naehrwert,
                           Duration haltbarkeit, String obstsorte) {
-        super(preis, inspektionsdatum, fachnummer,
-                hersteller, allergene, naehrwert, haltbarkeit
+        super(preis, fachnummer, hersteller,
+                allergene, naehrwert, haltbarkeit
         );
         this.obstsorte = obstsorte;
     }

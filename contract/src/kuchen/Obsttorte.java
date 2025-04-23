@@ -1,3 +1,4 @@
 package kuchen;
 
-public interface Obsttorte extends Obstkuchen,Kremkuchen {}
+public interface Obsttorte extends Obstkuchen,Kremkuchen {
+}

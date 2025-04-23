@@ -1,27 +1,23 @@
+import automat.*;
 import kuchen.Allergen;
 import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Automat<AbstractKuchen> a = new Automat<AbstractKuchen>(3);
+        Automat a = new Automat(3);
 
         a.addHersteller(new HerstellerImpl("Monte"));
         a.addHersteller(new HerstellerImpl("Ben"));
         a.addHersteller(new HerstellerImpl("DrOetker"));
 
-
-       
-
         Hersteller droetker = new HerstellerImpl("DrOetker");
         ObsttorteImpl obsttorte = new ObsttorteImpl(
                 new BigDecimal("6.00"),
-                new Date(),
                 3, // Fachnummer
                 droetker,
                 List.of(Allergen.Sesamsamen),
@@ -34,7 +30,6 @@ public class Main {
         Hersteller ben = new HerstellerImpl("Ben");
         ObstkuchenImpl obstkuchen = new ObstkuchenImpl(
                 new BigDecimal("5.20"),
-                new Date(),
                 2, // Fachnummer
                 ben,
                 List.of(Allergen.Haselnuss),
@@ -46,7 +41,7 @@ public class Main {
         Hersteller monte = new HerstellerImpl("Monte");
         KremkuchenImpl kremkuchen = new KremkuchenImpl(
                 new BigDecimal("4.50"),
-                new Date(), // aktuelles Datum
+                // aktuelles Datum
                 1, // Fachnummer
                 monte,
                 List.of(Allergen.Erdnuss),
@@ -57,7 +52,7 @@ public class Main {
 
         KremkuchenImpl kremkuchen2 = new KremkuchenImpl(
                 new BigDecimal("4.50"),
-                new Date(), // aktuelles Datum
+                // aktuelles Datum
                 1, // Fachnummer
                 new HerstellerImpl("JA"),
                 List.of(Allergen.Erdnuss),
@@ -68,7 +63,7 @@ public class Main {
 
         a.addKuchen(obstkuchen);
         a.addKuchen(kremkuchen);
-        System.out.println(a.addKuchen(kremkuchen2));
+        System.out.println("Kuchen erfolgreich eingefuegt: " + a.addKuchen(kremkuchen2));
         a.addKuchen(obsttorte);
         System.out.println();
 
