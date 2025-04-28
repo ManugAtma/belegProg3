@@ -1,19 +1,37 @@
-import automat.Automat;
+package automat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TestDomainLogic {
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+
+public class TestAutomat {
 
     Automat automat;
 
     @BeforeEach
     public void setUp() {
-        automat = new Automat(4);
+        automat = new Automat(2);
     }
 
-    // insertFourKuchen()?
+    // TODO 2 Mockito tests
 
-    // test contructors? -> seeehr viele NPEs
+    @Test
+    public void shouldThrowIllegalArgumentBecauseKapazitaetIsNegative() {
+        assertThrows(IllegalArgumentException.class, () -> new Automat(-3));
+    }
+
+    @Test
+    public void shouldReturnTrueBecauseObjectWasCreatedSuccesfully() {
+        Automat k = new Automat(1);
+        assertNotEquals(null, k);
+    }
+
+
 
     @Test
     public void shouldAddKuchenSuccessfully() {}
@@ -28,7 +46,10 @@ public class TestDomainLogic {
     public void shouldIncrementHerstellerCountByOneBecauseKuchenIsAdded() {}
 
     @Test
-    public void shouldAddKuchenBecasueItIsNull() {}
+    public void shouldReturnCorrectFachnummerForAddedKuchen(){}
+
+    @Test
+    public void shouldReturnCorrectEinfugedatumForAddedKuchen(){}
 
     @Test
     public void shouldNotAddKuchenBecauseItsHerstellerDoesntExist() {}
@@ -36,7 +57,8 @@ public class TestDomainLogic {
     @Test
     public void shouldNotAddKuchenBecauseMaxKapazitaetIsReached() {}
 
-
+    @Test
+    public void shouldThrowNPEBecauseKuchenIsNull() {}
 
 
 
@@ -53,7 +75,7 @@ public class TestDomainLogic {
     public void shouldNotRemoveKuchenBecauseOfInvalidFachnummer() {}
 
     @Test
-    public void shouldNotRemoveKuchenBecauseFachIsEmpty() {}
+    public void shouldReturnNullBecauseThereIsNoKuchenInFach() {}
 
 
 
@@ -66,8 +88,13 @@ public class TestDomainLogic {
     }
 
     @Test
+    public void shouldThrowNPEBecauseHerstellerIsNull(){}
+
+    @Test
     public void shouldReturnCorrectNumberOfKuchenAfterOneIsRemoved() {}
 
+    @Test
+    public void shouldReturnEmptyKuchenListBecauseNoKuchenInAutomat() {}
 
 
 
@@ -78,7 +105,7 @@ public class TestDomainLogic {
     public void shouldNotAddHerstellerBecauseItIsNull() {}
 
     @Test
-    public void shouldNotAddHerstellerBecauseItExistsAlready() {}
+    public void shouldReturnFalseBecauseHerstellerExistsAlready() {}
 
 
 
@@ -92,7 +119,7 @@ public class TestDomainLogic {
     public void shouldNotRemoveHerstellerBecauseItIsNull() {}
 
     @Test
-    public void shouldNotRemoveHerstellerBecauseItDoesntExistInAutomat() {}
+    public void shouldReturnNullBecauseHerstellerDoesntExistInAutomat() {}
 
 
 
@@ -102,30 +129,37 @@ public class TestDomainLogic {
     @Test
     public void shouldReturnNumberHerstellerAfterOneIsRemoved() {}
 
-
-
     @Test
-    public void shouldReturnVorhandenesAllergenGluten() {}
+    public void shouldReturnEmptyHerstellerSetBecauseNoHerstellerInAutomat() {}
 
-    @Test
-    public void shouldNotReturnVorhandenesAllergenGlutenBecauseItWasRemoved() {}
-
-    @Test
-    public void shouldReturnNichtVorhandenesAllergenErdnuss() {}
-
-    @Test
-    public void shouldNotReturnNichtVorhandenesAllergenErdnuss() {}
 
 
 
     @Test
-    public void shouldReturnCorrectInpektionsdatum() {}
+    public void shouldReturnTrueBecauseAllergenGlutenIsVorhanden() {}
+
+    @Test
+    public void shouldReturnFalseBecauseAllergenGlutenWasRemoved() {}
+
+    @Test
+    public void shouldReturnTrueBecauseAllergenErdnussIsNichtVorhanden() {}
+
+    @Test
+    public void shouldReturnFalseBecauseAllergenErdnussIsNichtVorhanden() {}
+
+    @Test
+    public void shouldReturnEmptyAllergeneListBecauseNoneExistInAutomat(){}
 
 
 
     @Test
-    public void shouldReturnKapazitaetOfFour() {
-        // kapazitaet of 4
+    public void shouldReturnCorrectInpektionsdatumAfterSet() {}
+
+
+
+    @Test
+    public void shouldReturnKapazitaetOfTwo() {
+        // kapazitaet of 2
     }
 }
 

@@ -18,47 +18,32 @@ public class Main {
         Hersteller droetker = new HerstellerImpl("DrOetker");
         ObsttorteImpl obsttorte = new ObsttorteImpl(
                 new BigDecimal("6.00"),
-                3, // Fachnummer
-                droetker,
-                List.of(Allergen.Sesamsamen),
-                400,
-                Duration.ofDays(3),
-                "Schoko",
-                "Kirsche"
+                droetker, List.of(Allergen.Sesamsamen),
+                400, Duration.ofDays(3),
+                "Schoko", "Kirsche"
         );
 
         Hersteller ben = new HerstellerImpl("Ben");
         ObstkuchenImpl obstkuchen = new ObstkuchenImpl(
                 new BigDecimal("5.20"),
-                2, // Fachnummer
-                ben,
-                List.of(Allergen.Haselnuss),
-                280,
-                Duration.ofDays(2),
+                ben, List.of(Allergen.Haselnuss),
+                280, Duration.ofDays(2),
                 "Erdbeere"
         );
 
         Hersteller monte = new HerstellerImpl("Monte");
         KremkuchenImpl kremkuchen = new KremkuchenImpl(
                 new BigDecimal("4.50"),
-                // aktuelles Datum
-                1, // Fachnummer
-                monte,
-                List.of(Allergen.Erdnuss),
-                350, // Nährwert
-                Duration.ofDays(4),
+                monte, List.of(Allergen.Erdnuss),
+                350, Duration.ofDays(4),
                 "Vanille"
         );
 
         KremkuchenImpl kremkuchen2 = new KremkuchenImpl(
                 new BigDecimal("4.50"),
-                // aktuelles Datum
-                1, // Fachnummer
                 new HerstellerImpl("JA"),
-                List.of(Allergen.Erdnuss),
-                350, // Nährwert
-                Duration.ofDays(4),
-                "Vanille"
+                List.of(Allergen.Erdnuss), 350,
+                Duration.ofDays(4), "Vanille"
         );
 
         a.addKuchen(obstkuchen);
@@ -127,5 +112,18 @@ public class Main {
             System.out.println(h.getKey().getName() + ": " + h.getValue());
         }
         System.out.println();
+
+        BigDecimal bd = new BigDecimal(-111);
+        Duration du = Duration.ofDays(-4);
+        System.out.println(du);
+
+        System.out.println(new HerstellerImpl("h").hashCode());
+
+        System.out.println("Test leeren Automat:");
+        Automat a2 = new Automat(1);
+        List<AbstractKuchen> akl = a2.getAlleKuchen();
+        for (AbstractKuchen k: akl){
+            System.out.println(k.getEinfuegedatum());
+        }
     }
 }

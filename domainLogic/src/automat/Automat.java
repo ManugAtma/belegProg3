@@ -25,7 +25,8 @@ public class Automat {
         }
     }
 
-
+    // möglich auch kein Kuchenobjekt entgegenzunehmen, sondern infos als String, und dann
+    // Kuchenobject selber bauen
     public synchronized boolean addKuchen(AbstractKuchen kuchen) {
         if (kuchen == null) throw new NullPointerException("kuchen is null");
         Hersteller dieserHersteller = kuchen.getHersteller();
@@ -38,8 +39,8 @@ public class Automat {
                 kuchenByFach.put(i, kuchen);
                 hersteller.put(dieserHersteller, hersteller.get(dieserHersteller) + 1);
                 this.incrementAllergene(kuchen);
-                kuchen.fachnummer = i;
-                kuchen.einfuegedatum = new Date();
+                kuchen.setFachnummer(i);
+                kuchen.setEinfuegedatum(new Date());
                 success = true;
             }
             i++;
@@ -77,7 +78,7 @@ public class Automat {
     }
 
 
-    public List<AbstractKuchen> getAlleKuchen(Hersteller hersteller) {
+    public List<AbstractKuchen> getAlleKuchenVon(Hersteller hersteller) {
         if (hersteller == null) throw new NullPointerException();
         Collection<AbstractKuchen> col = kuchenByFach.values();
         List<AbstractKuchen> list = new ArrayList<>();
@@ -107,6 +108,7 @@ public class Automat {
         return hersteller.entrySet();
     }
 
+
     public List<Allergen> getVorhandeneAllergene() {
         List<Allergen> vorhandeAllergene = new ArrayList<>();
         for (Allergen a : Allergen.values()) {
@@ -124,7 +126,7 @@ public class Automat {
     }
 
     public synchronized void setInspektionsDatum(int fachnummer) {
-        kuchenByFach.get(fachnummer).inspektionsdatum = new Date();
+        kuchenByFach.get(fachnummer).setInspektionsdatum(new Date());
     }
 
     public int getKapazitaet() {

@@ -14,12 +14,14 @@ public class ObsttorteImpl extends AbstractKuchen implements Obsttorte {
 
 
     // hier inspektionsdatum = einfuegedatum setzen?
-    public ObsttorteImpl(BigDecimal preis, int fachnummer, Hersteller hersteller,
+    public ObsttorteImpl(BigDecimal preis, Hersteller hersteller,
                          Collection<Allergen> allergene, int naehrwert, Duration haltbarkeit,
                          String kremsorte, String obstsorte) {
-        super(preis, fachnummer, hersteller,
+        super(preis, hersteller,
                 allergene, naehrwert, haltbarkeit
         );
+        if (kremsorte == null || obstsorte == null) throw new NullPointerException("krem- oder obstsorte sind null");
+        if (kremsorte.isEmpty() || obstsorte.isEmpty()) throw new IllegalArgumentException("krem- oder obstsorte sind empty");
         this.kremsorte = kremsorte;
         this.obstsorte = obstsorte;
     }

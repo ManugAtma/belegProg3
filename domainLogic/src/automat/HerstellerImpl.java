@@ -1,13 +1,13 @@
 package automat;
 
 import verwaltung.Hersteller;
-
 import java.util.Objects;
 
 public class HerstellerImpl implements Hersteller {
     private final String name;
 
     public HerstellerImpl(String name) {
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException("hersteller darf nicht null oder empty sein");
         this.name = name;
     }
 

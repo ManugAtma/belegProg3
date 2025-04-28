@@ -12,35 +12,37 @@ import java.util.Date;
 
 public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
 
-    BigDecimal preis;
-    Date inspektionsdatum;
-    int fachnummer;
+    private BigDecimal preis;
+    private Date inspektionsdatum;
+    private int fachnummer;
 
-    Date einfuegedatum;
+    private Date einfuegedatum;
 
-    Hersteller hersteller;
-    Collection<Allergen> allergene;
-    int naehrwert;
-    Duration haltbarkeit;
+    private Hersteller hersteller;
+    private Collection<Allergen> allergene;
+    private int naehrwert;
+    private Duration haltbarkeit;
 
 
     public AbstractKuchen() {
     }
 
-    // setter verwenden
-    public AbstractKuchen(BigDecimal preis, int fachnummer,
-                          Hersteller hersteller, Collection<Allergen> allergene,
+    // setter verwenden?
+    // was, wenn Kuchen keine Allergene hat? allergene dann null oder leere collection
+    public AbstractKuchen(BigDecimal preis, Hersteller hersteller, Collection<Allergen> allergene,
                           int naehrwert, Duration haltbarkeit) {
+
+        if (preis == null || hersteller == null || allergene == null || haltbarkeit == null)
+            throw new NullPointerException("kein argument darf null sein.");
+        if ((preis.compareTo(new BigDecimal(0)) < 0) || (naehrwert < 0) || (haltbarkeit.isNegative()))
+            throw new IllegalArgumentException("preis, naehrwert und haltbarkeit koennen nicht negativ sein");
+
         this.preis = preis;
-        this.fachnummer = -1;  // noch kein Fach zugewiesen
+        this.fachnummer = -1;  // Fehlerwert, da noch kein Fach zugewiesen
         this.hersteller = hersteller;
         this.allergene = allergene;
         this.naehrwert = naehrwert;
         this.haltbarkeit = haltbarkeit;
-    }
-
-    public void setPreis(BigDecimal preis) {
-        this.preis = preis;
     }
 
     @Override
@@ -48,17 +50,9 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
         return preis;
     }
 
-    public void setInspektionsdatum(Date inspektionsdatum) {
-        this.inspektionsdatum = inspektionsdatum;
-    }
-
     @Override
     public Date getInspektionsdatum() {
         return inspektionsdatum;
-    }
-
-    public void setFachnummer(int fachnummer) {
-        this.fachnummer = fachnummer;
     }
 
     @Override
@@ -100,5 +94,27 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
                 ')';
     }
 
-    // keine setter einfuegedatum und haltbarkeit,da unveränderbar?
+    public Date getEinfuegedatum(){
+        return einfuegedatum;
+    }
+
+    void setFachnummer(int fachnummer) {
+        if (fachnummer < 0) throw new IllegalArgumentException("fachnummer kann nicht negativ sein");
+        this.fachnummer = fachnummer;
+    }
+
+    void setInspektionsdatum(Date inspektionsdatum) {
+        if (inspektionsdatum == null) throw new NullPointerException("inspektionsdatum kann nicht null sein");
+        this.inspektionsdatum = inspektionsdatum;
+    }
+
+    void setEinfuegedatum(Date datum) {
+        if (datum == null) throw new NullPointerException("einfuegedatum kann nicht null sein");
+        einfuegedatum = datum;
+    }
+
+    /*void setPreis(BigDecimal preis) {
+        this.preis = preis;
+    }*/
+
 }

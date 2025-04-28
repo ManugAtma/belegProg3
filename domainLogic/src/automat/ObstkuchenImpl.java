@@ -12,14 +12,14 @@ public class ObstkuchenImpl extends AbstractKuchen implements Obstkuchen {
 
     private String obstsorte;
 
-    public ObstkuchenImpl(){}
-
-    public ObstkuchenImpl(BigDecimal preis, int fachnummer, Hersteller hersteller,
+    public ObstkuchenImpl(BigDecimal preis, Hersteller hersteller,
                           Collection<Allergen> allergene, int naehrwert,
                           Duration haltbarkeit, String obstsorte) {
-        super(preis, fachnummer, hersteller,
+        super(preis, hersteller,
                 allergene, naehrwert, haltbarkeit
         );
+        if (obstsorte == null) throw new NullPointerException("obstsorte ist null");
+        if (obstsorte.isEmpty()) throw new IllegalArgumentException("obstsorte ist empty");
         this.obstsorte = obstsorte;
     }
 
