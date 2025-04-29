@@ -33,11 +33,49 @@ public class TestAbstractKuchen {
     }
 
     @Test
+    public void shouldThrowNPEBecausePreisIsNull() {
+        assertThrows(NullPointerException.class, () -> new KremkuchenImpl(
+                null, new HerstellerImpl("Monte"),
+                List.of(Allergen.Erdnuss), 350,
+                Duration.ofDays(4), "Vanille")
+        );
+    }
+
+    @Test
+    public void shouldThrowNPEBecauseAllergeneIsNull() {
+        assertThrows(NullPointerException.class, () -> new KremkuchenImpl(
+                new BigDecimal("4.50"), new HerstellerImpl("Monte"),
+                null, 350,
+                Duration.ofDays(4), "Vanille")
+        );
+    }
+
+    @Test
+    public void shouldThrowNPEBecauseHaltbarkeitIsNull() {
+        assertThrows(NullPointerException.class, () -> new KremkuchenImpl(
+                new BigDecimal("4.50"), new HerstellerImpl("Monte"),
+                List.of(Allergen.Erdnuss), 350,
+                null, "Vanille")
+        );
+    }
+
+
+    @Test
     public void shouldThrowIllegalArgumentBecauseNaehrwertIsNegative() {
 
         assertThrows(IllegalArgumentException.class, () -> new KremkuchenImpl(
                 new BigDecimal("4.50"), new HerstellerImpl("Monte"),
                 List.of(Allergen.Erdnuss), -5, Duration.ofDays(4),
+                "Vanille")
+        );
+    }
+
+    @Test
+    public void shouldThrowIllegalArgumentBecausePriceIsNegative() {
+
+        assertThrows(IllegalArgumentException.class, () -> new KremkuchenImpl(
+                new BigDecimal(-4.50), new HerstellerImpl("Monte"),
+                List.of(Allergen.Erdnuss), 5, Duration.ofDays(4),
                 "Vanille")
         );
     }
@@ -184,4 +222,36 @@ public class TestAbstractKuchen {
         k.setEinfuegedatum(now);
         assertEquals(now, k.getEinfuegedatum());
     }
+
+    @Test
+    public void shouldReturnCorrectToString() {
+        HerstellerImpl hersteller = new HerstellerImpl("Monte");
+        Date einfuegedatum = new Date();
+        Date inspektionsdatum = new Date();
+        KremkuchenImpl k = new KremkuchenImpl(
+                new BigDecimal("4.50"),
+                hersteller,
+                List.of(Allergen.Erdnuss, Allergen.Gluten),
+                350,
+                Duration.ofDays(4),
+                "Vanille"
+        );
+        k.setFachnummer(1);
+        k.setEinfuegedatum(einfuegedatum);
+        k.setInspektionsdatum(inspektionsdatum);
+
+        String expected = "KremkuchenImpl (" +
+                "fachnummer: 1" +
+                ", einfuegedatum: " + einfuegedatum +
+                ", preis: 4.50" +
+                ", inspektionsdatum: " + inspektionsdatum +
+                ", hersteller: Monte" +
+                ", allergene: [Erdnuss, Gluten]" +
+                ", naehrwert: 350" +
+                ", haltbarkeit: PT96H" +
+                ')';
+
+        assertEquals(expected, k.toString());
+    }
+
 }

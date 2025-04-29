@@ -23,10 +23,6 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
     private int naehrwert;
     private Duration haltbarkeit;
 
-
-    public AbstractKuchen() {
-    }
-
     // setter verwenden?
     // was, wenn Kuchen keine Allergene hat? allergene dann null oder leere collection
     public AbstractKuchen(BigDecimal preis, Hersteller hersteller, Collection<Allergen> allergene,

@@ -49,12 +49,14 @@ public class Automat {
     }
 
     private void incrementAllergene(AbstractKuchen kuchen) {
+        if (kuchen == null) return;
         for (Allergen a : kuchen.getAllergene()) {
             allergene.put(a, allergene.get(a) + 1);
         }
     }
 
     private void decrementAllergene(AbstractKuchen kuchen) {
+        if (kuchen == null) return;
         for (Allergen a : kuchen.getAllergene()) {
             allergene.put(a, allergene.get(a) - 1);
         }
@@ -68,7 +70,7 @@ public class Automat {
         return result;
     }
 
-    public List<AbstractKuchen> getAlleKuchen() {
+    public List<AbstractKuchen> getAlleKuchenList() {
         Collection<AbstractKuchen> col = kuchenByFach.values();
         List<AbstractKuchen> list = new ArrayList<>();
         for (AbstractKuchen k : col) {
@@ -77,14 +79,26 @@ public class Automat {
         return list;
     }
 
+    public Map<Integer, AbstractKuchen> getAlleKuchenMap() {
+        return kuchenByFach;
+    }
 
-    public List<AbstractKuchen> getAlleKuchenVon(Hersteller hersteller) {
-        if (hersteller == null) throw new NullPointerException();
+    /**
+     * Gets a List of Kuchen by specified type
+     * @param type the type of the Kuchen without the four last letters "Impl"
+     * @return List of Kuchen by specified type
+     * @throws NullPointerException,IllegalArgumentException when type is null or empty
+     */
+    public List<AbstractKuchen> getAlleKuchenOfType(String type) {
+        if (type == null) throw new NullPointerException("type ist null");
+        if (type.isEmpty()) throw new IllegalArgumentException("type ist empty");
         Collection<AbstractKuchen> col = kuchenByFach.values();
         List<AbstractKuchen> list = new ArrayList<>();
         for (AbstractKuchen k : col) {
-            if (k != null
-                    && k.getHersteller().equals(hersteller)) list.add(k);
+            if (k != null && k.getClass().getSimpleName()
+                        .substring(0, k.getClass().getSimpleName().length() - 4)
+                        .equals(type)
+            ) list.add(k);
         }
         return list;
     }
@@ -109,7 +123,7 @@ public class Automat {
     }
 
 
-    public List<Allergen> getVorhandeneAllergene() {
+    public List<Allergen> getVorhandeneAllergeneList() {
         List<Allergen> vorhandeAllergene = new ArrayList<>();
         for (Allergen a : Allergen.values()) {
             if (allergene.get(a) > 0) vorhandeAllergene.add(a);
@@ -117,7 +131,7 @@ public class Automat {
         return vorhandeAllergene;
     }
 
-    public List<Allergen> getNichtVorhandeneAllergene() {
+    public List<Allergen> getNichtVorhandeneAllergeneList() {
         List<Allergen> nichtVorhandeAllergene = new ArrayList<>();
         for (Allergen a : Allergen.values()) {
             if (allergene.get(a) == 0) nichtVorhandeAllergene.add(a);
@@ -125,8 +139,19 @@ public class Automat {
         return nichtVorhandeAllergene;
     }
 
-    public synchronized void setInspektionsDatum(int fachnummer) {
-        kuchenByFach.get(fachnummer).setInspektionsdatum(new Date());
+    /**
+     * Returns a Map which maps Allergen to its number of occurrences
+     * @return Map which is always of size 4
+     */
+    public Map<Allergen, Integer> getAlleAllergeneMap() {
+        return this.allergene;
+    }
+
+    public synchronized boolean setInspektionsdatum(int fachnummer, Date datum) {
+        if (datum == null) throw new NullPointerException("datum ist null");
+        if (kuchenByFach.get(fachnummer) == null) return false;
+        kuchenByFach.get(fachnummer).setInspektionsdatum(datum);
+        return true;
     }
 
     public int getKapazitaet() {

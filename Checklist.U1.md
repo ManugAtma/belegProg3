@@ -16,22 +16,22 @@ Flüchtige Quellen, wie Sprachmodelle, sind per screen shot zu dokumentieren.
 ### Pflichtteil
 - [ ] Quellen angegeben
 - [ ] zip Archiv
-- [ ] IntelliJ-Projekt (kein Gradle, Maven o.ä.)
-- [ ] JUnit5 und Mockito als Testframeworks (soweit verwendet)
-- [ ] keine weiteren Bibliotheken außer JavaFX
+- [x] IntelliJ-Projekt (kein Gradle, Maven o.ä.)
+- [x] JUnit5 und Mockito als Testframeworks (soweit verwendet)
+- [x] keine weiteren Bibliotheken außer JavaFX
 - [ ] keine Umlaute, Sonderzeichen, etc. in Datei- und Pfadnamen
 - [ ] kompilierbar
-- [ ] Trennung zwischen Test- und Produktiv-Code
+- [x] Trennung zwischen Test- und Produktiv-Code
 - [ ] main-Methoden nur im default package des module belegProg3
-- [ ] ausführbar
-- [ ] CRUD für eine Kuchensorte
-- [ ] mindestens ein Test
+- [x] ausführbar
+- [x] CRUD für eine Kuchensorte
+- [x] mindestens ein Test
 
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
-- [ ] mindestens je ein Test für CRUD
-- [ ] mindestens zwei Tests mit Mockito
-- [ ] Einfügen der Kuchen vollständig implementiert und vollständig getestet
-- [ ] Unterstützung von mindestens zwei Kuchensorten
-- [ ] vollständige GL
-- [ ] keine Code-Duplikate
+- [x] mindestens je ein Test für CRUD
+- [x] mindestens zwei Tests mit Mockito
+- [x] Einfügen der Kuchen vollständig implementiert und vollständig getestet
+- [x] Unterstützung von mindestens zwei Kuchensorten
+- [x] vollständige GL
+- [x] keine Code-Duplikate

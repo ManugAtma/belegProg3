@@ -59,19 +59,19 @@ public class Main {
         System.out.println();
 
         System.out.println("Alle Kuchen:");
-        for (AbstractKuchen ak: a.getAlleKuchen()){
+        for (AbstractKuchen ak: a.getAlleKuchenList()){
             System.out.println(ak);
         }
         System.out.println();
 
         System.out.println("vorhandene Allergene:");
-        for (Allergen allergen : a.getVorhandeneAllergene()){
+        for (Allergen allergen : a.getVorhandeneAllergeneList()){
             System.out.println(allergen);
         }
         System.out.println();
 
         System.out.println("nicht vorhandene Allergene:");
-        for (Allergen allergen : a.getNichtVorhandeneAllergene()){
+        for (Allergen allergen : a.getNichtVorhandeneAllergeneList()){
             System.out.println(allergen);
         }
         System.out.println();
@@ -81,19 +81,19 @@ public class Main {
         System.out.println();
 
         System.out.println("Alle Kuchen:");
-        for (AbstractKuchen ak: a.getAlleKuchen()){
+        for (AbstractKuchen ak: a.getAlleKuchenList()){
             System.out.println(ak);
         }
         System.out.println();
 
         System.out.println("vorhandene Allergene:");
-        for (Allergen allergen : a.getVorhandeneAllergene()){
+        for (Allergen allergen : a.getVorhandeneAllergeneList()){
             System.out.println(allergen);
         }
         System.out.println();
 
         System.out.println("nicht vorhandene Allergene:");
-        for (Allergen allergen : a.getNichtVorhandeneAllergene()){
+        for (Allergen allergen : a.getNichtVorhandeneAllergeneList()){
             System.out.println(allergen);
         }
         System.out.println();
@@ -121,7 +121,7 @@ public class Main {
 
         System.out.println("Test leeren Automat:");
         Automat a2 = new Automat(1);
-        List<AbstractKuchen> akl = a2.getAlleKuchen();
+        List<AbstractKuchen> akl = a2.getAlleKuchenList();
         for (AbstractKuchen k: akl){
             System.out.println(k.getEinfuegedatum());
         }
