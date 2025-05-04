@@ -3,10 +3,10 @@ package automat;
 import kuchen.Allergen;
 import kuchen.Obsttorte;
 import verwaltung.Hersteller;
-
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
+
 
 public class ObsttorteImpl extends AbstractKuchen implements Obsttorte {
     private String obstsorte;

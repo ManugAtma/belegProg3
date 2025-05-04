@@ -14,8 +14,8 @@ Flüchtige Quellen, wie Sprachmodelle, sind per screen shot zu dokumentieren.
 1 Punkt für die Erfüllung des Pflichtteils
 
 ### Pflichtteil
-- [ ] Quellen angegeben
-- [ ] zip Archiv
+- [x] Quellen angegeben
+- [x] zip Archiv
 - [x] IntelliJ-Projekt (kein Gradle, Maven o.ä.)
 - [x] JUnit5 und Mockito als Testframeworks (soweit verwendet)
 - [x] keine weiteren Bibliotheken außer JavaFX

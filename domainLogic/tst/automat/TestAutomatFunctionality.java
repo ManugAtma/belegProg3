@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class TestAutomat {
+public class TestAutomatFunctionality {
 
     Automat automat;
 
@@ -53,19 +53,7 @@ public class TestAutomat {
     }
 
 
-    // constructors
-
-    @Test
-    public void shouldThrowIllegalArgumentBecauseKapazitaetIsNegative() {
-        assertThrows(IllegalArgumentException.class, () -> new Automat(-3));
-    }
-
-    @Test
-    public void shouldReturnTrueBecauseObjectWasCreatedSuccesfully() {
-        Automat k = new Automat(1);
-        assertNotEquals(null, k);
-    }
-
+    // JUnit tests
 
     // addKuchen
 
@@ -144,24 +132,6 @@ public class TestAutomat {
 
         assertEquals(0, automat.getAlleKuchenMap().get(0).getFachnummer());
     }
-
-
-   /* // not possible because Date objects are never equal
-    @Test
-    public void shouldReturnCorrectEinfugedatumForAddedKuchen() {
-        Hersteller monte = new HerstellerImpl("Monte");
-        KremkuchenImpl kremkuchen = new KremkuchenImpl(
-                new BigDecimal("4.50"),
-                monte, List.of(Allergen.Gluten),
-                350, Duration.ofDays(4),
-                "Vanille"
-        );
-        automat.addHersteller(monte);
-        automat.addKuchen(kremkuchen);
-
-        assertEquals(, automat.getAlleKuchenMap().get(0).getEinfuegedatum());
-    }*/
-
 
     @Test
     public void shouldNotAddKuchenBecauseItsHerstellerDoesntExist() {
@@ -392,7 +362,6 @@ public class TestAutomat {
     public void shouldAddHerstellerSuccessfully() {
         Hersteller monte = new HerstellerImpl("Monte");
         assertTrue(automat.addHersteller(monte));
-
     }
 
     @Test

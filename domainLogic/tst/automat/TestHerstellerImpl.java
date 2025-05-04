@@ -2,8 +2,8 @@ package automat;
 
 import org.junit.jupiter.api.Test;
 import verwaltung.Hersteller;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TestHerstellerImpl {
 

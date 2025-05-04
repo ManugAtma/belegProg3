@@ -2,16 +2,17 @@ package automat;
 
 import kuchen.Allergen;
 import verwaltung.Hersteller;
-
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
+
 
 public class Automat {
 
     private final int kapazitaet;
     private final Map<Integer, AbstractKuchen> kuchenByFach;
     private final Map<Hersteller, Integer> hersteller
-            = new ConcurrentHashMap<>();
+            = new ConcurrentHashMap<>(); // Quelle: siehe Quellen.md
     private final Map<Allergen, Integer> allergene
             = new ConcurrentHashMap<>(Allergen.values().length);
 

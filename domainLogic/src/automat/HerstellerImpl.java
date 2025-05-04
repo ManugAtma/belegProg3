@@ -3,6 +3,8 @@ package automat;
 import verwaltung.Hersteller;
 import java.util.Objects;
 
+
+
 public class HerstellerImpl implements Hersteller {
     private final String name;
 
@@ -16,6 +18,7 @@ public class HerstellerImpl implements Hersteller {
         return name;
     }
 
+    // Quelle: siehe Quellen.md
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -24,6 +27,7 @@ public class HerstellerImpl implements Hersteller {
         return Objects.equals(name, that.name);
     }
 
+    // Quelle: siehe Quellen.md
     @Override
     public int hashCode() {
         return Objects.hashCode(name);

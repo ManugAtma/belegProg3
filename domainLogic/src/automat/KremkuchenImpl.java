@@ -3,10 +3,10 @@ package automat;
 import kuchen.Allergen;
 import kuchen.Kremkuchen;
 import verwaltung.Hersteller;
-
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
+
 
 public class KremkuchenImpl extends AbstractKuchen implements Kremkuchen {
     private String kremsorte;
