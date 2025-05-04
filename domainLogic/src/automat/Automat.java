@@ -25,8 +25,7 @@ public class Automat {
         }
     }
 
-    // möglich auch kein Kuchenobjekt entgegenzunehmen, sondern infos als String, und dann
-    // Kuchenobject selber bauen
+
     public synchronized boolean addKuchen(AbstractKuchen kuchen) {
         if (kuchen == null) throw new NullPointerException("kuchen is null");
         Hersteller dieserHersteller = kuchen.getHersteller();
@@ -85,7 +84,7 @@ public class Automat {
 
     /**
      * Gets a List of Kuchen by specified type
-     * @param type the type of the Kuchen without the four last letters "Impl"
+     * @param type the interface type of the Kuchen, so without "Impl"
      * @return List of Kuchen by specified type
      * @throws NullPointerException,IllegalArgumentException when type is null or empty
      */
@@ -140,7 +139,7 @@ public class Automat {
     }
 
     /**
-     * Returns a Map which maps Allergen to its number of occurrences
+     * Returns a Map which maps an Allergen to its number of occurrences
      * @return Map which is always of size 4
      */
     public Map<Allergen, Integer> getAlleAllergeneMap() {
@@ -157,6 +156,5 @@ public class Automat {
     public int getKapazitaet() {
         return kapazitaet;
     }
-
 }
 

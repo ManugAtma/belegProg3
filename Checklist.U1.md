@@ -19,10 +19,10 @@ Flüchtige Quellen, wie Sprachmodelle, sind per screen shot zu dokumentieren.
 - [x] IntelliJ-Projekt (kein Gradle, Maven o.ä.)
 - [x] JUnit5 und Mockito als Testframeworks (soweit verwendet)
 - [x] keine weiteren Bibliotheken außer JavaFX
-- [ ] keine Umlaute, Sonderzeichen, etc. in Datei- und Pfadnamen
-- [ ] kompilierbar
+- [x] keine Umlaute, Sonderzeichen, etc. in Datei- und Pfadnamen
+- [x] kompilierbar
 - [x] Trennung zwischen Test- und Produktiv-Code
-- [ ] main-Methoden nur im default package des module belegProg3
+- [x] main-Methoden nur im default package des module belegProg3
 - [x] ausführbar
 - [x] CRUD für eine Kuchensorte
 - [x] mindestens ein Test
