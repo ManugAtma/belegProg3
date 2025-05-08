@@ -1,18 +1,19 @@
 package automat;
 
 import kuchen.Allergen;
+import observe.ObservableAutomat;
 import verwaltung.Hersteller;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-
-public class Automat {
+// TODO add override annotation after defining methods in interface
+public class Automat implements ObservableAutomat {
 
     private final int kapazitaet;
     private final Map<Integer, AbstractKuchen> kuchenByFach;
     private final Map<Hersteller, Integer> hersteller
-            = new ConcurrentHashMap<>(); // Quelle: siehe Quellen.md
+            = new ConcurrentHashMap<>();
     private final Map<Allergen, Integer> allergene
             = new ConcurrentHashMap<>(Allergen.values().length);
 

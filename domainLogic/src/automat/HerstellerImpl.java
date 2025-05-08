@@ -18,7 +18,7 @@ public class HerstellerImpl implements Hersteller {
         return name;
     }
 
-    // Quelle: siehe Quellen.md
+    // Quelle: Ich habe Methode automatisch von IntelliJ generieren lassen. Allgemeine Infos über die Methode von: siehe Quellen.md
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,7 +27,7 @@ public class HerstellerImpl implements Hersteller {
         return Objects.equals(name, that.name);
     }
 
-    // Quelle: siehe Quellen.md
+    // Quelle: Ich habe Methode automatisch von IntelliJ generieren lassen. Allgemeine Infos über die Methode von: siehe Quellen.md
     @Override
     public int hashCode() {
         return Objects.hashCode(name);

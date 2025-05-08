@@ -1,5 +1,6 @@
 import automat.*;
 import kuchen.Allergen;
+import kuchen.Kuchen;
 import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
@@ -125,5 +126,9 @@ public class Main {
         for (AbstractKuchen k: akl){
             System.out.println(k.getEinfuegedatum());
         }
+
+        Kuchen obsttorte2;
+
+        System.out.println(obsttorte.getClass().getName());
     }
 }
