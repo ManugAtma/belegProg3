@@ -1,6 +1,7 @@
 package console.modes;
 
 import console.Command;
+import console.contract.InputMode;
 
 public class PMode implements InputMode {
 

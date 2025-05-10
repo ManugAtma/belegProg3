@@ -1,5 +1,6 @@
 package console;
 
+import console.contract.InputMode;
 import console.modes.*;
 
 public class ModeParser {

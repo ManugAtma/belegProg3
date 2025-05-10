@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Automat a = new Automat(3);
+       /* Automat a = new Automat(3);
 
         a.addHersteller(new HerstellerImpl("Monte"));
         a.addHersteller(new HerstellerImpl("Ben"));
@@ -129,6 +129,23 @@ public class Main {
 
         Kuchen obsttorte2;
 
-        System.out.println(obsttorte.getClass().getName());
+        System.out.println(obsttorte.getClass().getName());*/
+
+      /*  String input = "  Kremkuchen Alice 4,50 386 36 Gluten,Erdnuss Butter";
+        String s = input.trim();
+        System.out.println(input);
+        System.out.println(s);*/
+
+        double d;
+        String preis = "4,50";
+        String inputWithDot = preis.replace(',', '.');
+        System.out.println(inputWithDot);
+        try {
+            d = Double.parseDouble(inputWithDot);
+        } catch (NumberFormatException e) {
+            System.out.println("preis must be a real number");
+        }
+
+        double x = 4.50;
     }
 }

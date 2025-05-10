@@ -3,11 +3,13 @@ package automat;
 import kuchen.Allergen;
 import observe.ObservableAutomat;
 import verwaltung.Hersteller;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
 // TODO add override annotation after defining methods in interface
+// TODO use kuchenType functionality?
 public class Automat implements ObservableAutomat {
 
     private final int kapazitaet;
@@ -16,6 +18,8 @@ public class Automat implements ObservableAutomat {
             = new ConcurrentHashMap<>();
     private final Map<Allergen, Integer> allergene
             = new ConcurrentHashMap<>(Allergen.values().length);
+  /*  private final Map<String, Integer> kuchenTypes
+            = new ConcurrentHashMap<>(); // to check available kuchenTypes and their number of arguments for CLI*/
 
 
     public Automat(int kapazitaet) {
@@ -25,7 +29,18 @@ public class Automat implements ObservableAutomat {
         for (Allergen a : Allergen.values()) {
             allergene.put(a, 0);
         }
+        // this.addKuchenTypes();
     }
+
+    /*private void addKuchenTypes() {
+        this.kuchenTypes.put("Kremkuchen", 7);
+        this.kuchenTypes.put("Obstkuchen", 7);
+        this.kuchenTypes.put("Obsttorte", 8);
+    }
+
+    public Map<String, Integer> getKuchenTypes() {
+        return this.kuchenTypes;
+    }*/
 
 
     public synchronized boolean addKuchen(AbstractKuchen kuchen) {
@@ -86,6 +101,7 @@ public class Automat implements ObservableAutomat {
 
     /**
      * Gets a List of Kuchen by specified type
+     *
      * @param type the interface type of the Kuchen, so without "Impl"
      * @return List of Kuchen by specified type
      * @throws NullPointerException,IllegalArgumentException when type is null or empty
@@ -97,8 +113,8 @@ public class Automat implements ObservableAutomat {
         List<AbstractKuchen> list = new ArrayList<>();
         for (AbstractKuchen k : col) {
             if (k != null && k.getClass().getSimpleName()
-                        .substring(0, k.getClass().getSimpleName().length() - 4)
-                        .equals(type)
+                    .substring(0, k.getClass().getSimpleName().length() - 4)
+                    .equals(type)
             ) list.add(k);
         }
         return list;
@@ -142,6 +158,7 @@ public class Automat implements ObservableAutomat {
 
     /**
      * Returns a Map which maps an Allergen to its number of occurrences
+     *
      * @return Map which is always of size 4
      */
     public Map<Allergen, Integer> getAlleAllergeneMap() {
