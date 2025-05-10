@@ -7,5 +7,6 @@ public class GetKuchenHandler implements CLIHandler {
 
     @Override
     public void handle(CLIEvent e) {
+        System.out.println("handling GetKuchenEvent: " + e);
     }
 }

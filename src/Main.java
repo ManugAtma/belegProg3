@@ -136,7 +136,7 @@ public class Main {
         System.out.println(input);
         System.out.println(s);*/
 
-        double d;
+       /* double d;
         String preis = "4,50";
         String inputWithDot = preis.replace(',', '.');
         System.out.println(inputWithDot);
@@ -146,6 +146,22 @@ public class Main {
             System.out.println("preis must be a real number");
         }
 
-        double x = 4.50;
+        double x = 4.50;*/
+
+       /* String input = "Hel6o.World,Test";
+
+        if (input.matches("[a-zA-Z.,]+")) {
+            System.out.println("Valid input");
+        } else {
+            System.out.println("Invalid input");
+        }*/
+
+        String input = "         ";
+
+
+        String[] arguments = input.trim().split("\\s+");
+
+        System.out.println(arguments.length);
+
     }
 }

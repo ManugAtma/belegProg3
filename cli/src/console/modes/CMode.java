@@ -28,11 +28,10 @@ public class CMode implements InputMode {
 
     private Command parseAddHersteller(String arg) {
 
-        if (arg.isEmpty()){
-            System.out.println("hersteller cannot be empty");
+        if (!arg.matches("[a-zA-Z,]+")) {
+            System.out.println("hersteller name can only contain letters and commas and must not be empty");
             return null;
         }
-
         Hersteller hersteller = new HerstellerImpl(arg);
         CLIEvent event = new AddHerstellerEvent(hersteller);
         return new Command(Operator.ADD_HERSTELLER, event);

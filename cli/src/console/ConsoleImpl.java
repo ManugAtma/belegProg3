@@ -51,7 +51,7 @@ public class ConsoleImpl implements Console {
             else {
                 Command command = mode.parseCommand(input);
                 if (command != null) {
-                    CLIHandler handler = handlers.get(command.getOperator());
+                    CLIHandler handler = handlers.get(command.getOperator()); // NPE for missing handler?
                     CLIEvent event = command.getEvent();
                     handler.handle(event);
                 }
