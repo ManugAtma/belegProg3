@@ -8,10 +8,12 @@ import event.events.GetAllergeneEvent;
 import event.events.GetHerstellerEvent;
 import event.events.GetKuchenEvent;
 
-public class RMode implements InputMode {
+public class RMode extends AbstractInputMode {
 
     @Override
     public Command parseCommand(String input) {
+
+        if (input.trim().isEmpty()) return null;
 
         String[] args = input.trim().split("\\s+");
 

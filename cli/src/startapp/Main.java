@@ -20,6 +20,9 @@ public class Main {
         c.setHandler(Operator.GET_KUCHEN, new GetKuchenHandler());
         c.setHandler(Operator.REMOVE_HERSTELLER, new RemoveHerstellerHandler());
         c.setHandler(Operator.REMOVE_KUCHEN, new RemoveKuchenHandler());
+        c.setHandler(Operator.SET_FACHNUMMER, new SetFachnummerHandler());
+        c.setHandler(Operator.SAVE, new SaveHandler());
+        c.setHandler(Operator.LOAD, new LoadHandler());
         c.execute();
 
 

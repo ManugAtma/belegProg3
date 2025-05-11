@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-public class CMode implements InputMode {
+public class CMode extends AbstractInputMode {
 
     @Override
     public Command parseCommand(String input) {
+
+        if (input.trim().isEmpty()) return null;
 
         String[] args = input.trim().split("\\s+");
         if (args.length == 1) return parseAddHersteller(args[0]);
@@ -28,11 +30,10 @@ public class CMode implements InputMode {
 
     private Command parseAddHersteller(String arg) {
 
-        if (!arg.matches("[a-zA-Z,]+")) {
-            System.out.println("hersteller name can only contain letters and commas and must not be empty");
-            return null;
-        }
-        Hersteller hersteller = new HerstellerImpl(arg);
+        String name = this.parseLetterOnlyString(arg, "hersteller");
+        if (name == null) return null; // arg contains non letter char
+
+        Hersteller hersteller = new HerstellerImpl(name);
         CLIEvent event = new AddHerstellerEvent(hersteller);
         return new Command(Operator.ADD_HERSTELLER, event);
     }
@@ -58,18 +59,19 @@ public class CMode implements InputMode {
         BigDecimal preis = this.parsePreis(args[2]);
         if (preis == null) return null;
 
-        Integer naerhwert = this.parseStringToInt(args[3], "naehrwert");
+        Integer naerhwert = this.parseStringToPositiveInt(args[3], "naehrwert");
         if (naerhwert == null) return null;
 
         Duration haltbarkeit;
-        Integer i = this.parseStringToInt(args[4], "haltbarkeit");
+        Integer i = this.parseStringToPositiveInt(args[4], "haltbarkeit");
         if (i == null) return null;
         else haltbarkeit = Duration.ofDays(i);
 
         Collection<Allergen> allergene = this.parseAllergene(args[5]);
         if (allergene == null) return null;
 
-        String sorte1 = args[6]; // obstsorte or kremsorte
+        String sorte1 = this.parseLetterOnlyString(args[6], "kremsorte or obstsorte"); // obstsorte or kremsorte
+        if (sorte1 == null) return null;
 
         AbstractKuchen kuchen = null;
         switch (args[0]) {
@@ -86,10 +88,12 @@ public class CMode implements InputMode {
                 );
                 break;
             case "Obsttorte":
-                String sorte2 = args[7];
+                String obstsorte = this.parseLetterOnlyString(args[7], "obstsorte");
+                if (obstsorte == null) return null;
+
                 kuchen = new ObsttorteImpl(
                         preis, hersteller, allergene,
-                        naerhwert, haltbarkeit, sorte1, sorte2
+                        naerhwert, haltbarkeit, sorte1, obstsorte
                 );
                 break;
             default:
@@ -101,20 +105,7 @@ public class CMode implements InputMode {
     }
 
 
-    private Integer parseStringToInt(String input, String arg) {
-        int i;
-        try {
-            i = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            System.out.println(arg + " must be an integer");
-            return null;
-        }
-        if (i <= 0) {
-            System.out.println(arg + " must be >0");
-            return null;
-        }
-        return i;
-    }
+
 
     private BigDecimal parsePreis(String input) {
         double d;

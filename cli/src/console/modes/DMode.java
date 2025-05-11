@@ -7,15 +7,12 @@ import event.contract.CLIEvent;
 import event.events.RemoveHerstellerEvent;
 import event.events.RemoveKuchenEvent;
 
-public class DMode implements InputMode {
+public class DMode extends AbstractInputMode {
 
     @Override
     public Command parseCommand(String input) {
 
-        if (input.trim().isEmpty()) {
-            System.out.println("invalid command");
-            return null;
-        }
+        if (input.trim().isEmpty()) return null;
 
         String[] args = input.trim().split("\\s+");
 
@@ -24,23 +21,22 @@ public class DMode implements InputMode {
             return null;
         }
 
-        if (args[0].matches("[a-zA-Z,]+")) return this.parseHersteller(args[0]);
+        if (Character.isLetter(args[0].charAt(0))) return this.parseHersteller(args[0]);
         return this.parseFachnummer(args[0]);
     }
 
-    public Command parseHersteller(String arg) {
+    private Command parseHersteller(String arg) {
+
+        if (this.parseLetterOnlyString(arg, "hersteller") == null) return null;
+
         CLIEvent event = new RemoveHerstellerEvent(arg);
         return new Command(Operator.REMOVE_HERSTELLER, event);
     }
 
-    public Command parseFachnummer(String arg) {
-        int i;
-        try {
-            i = Integer.parseInt(arg);
-        } catch (NumberFormatException e) {
-            System.out.println("fachnummer must be an integer");
-            return null;
-        }
+    private Command parseFachnummer(String arg) {
+        Integer i = this.parseStringToPositiveInt(arg, "fachnummer");
+        if (i == null) return null;
+
         CLIEvent event = new RemoveKuchenEvent(i);
         return new Command(Operator.REMOVE_KUCHEN, event);
     }

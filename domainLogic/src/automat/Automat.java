@@ -3,6 +3,7 @@ package automat;
 import kuchen.Allergen;
 import observe.ObservableAutomat;
 import verwaltung.Hersteller;
+import observe.Observer;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,8 +19,7 @@ public class Automat implements ObservableAutomat {
             = new ConcurrentHashMap<>();
     private final Map<Allergen, Integer> allergene
             = new ConcurrentHashMap<>(Allergen.values().length);
-  /*  private final Map<String, Integer> kuchenTypes
-            = new ConcurrentHashMap<>(); // to check available kuchenTypes and their number of arguments for CLI*/
+    private final List<Observer> observer;
 
 
     public Automat(int kapazitaet) {
@@ -29,19 +29,21 @@ public class Automat implements ObservableAutomat {
         for (Allergen a : Allergen.values()) {
             allergene.put(a, 0);
         }
-        // this.addKuchenTypes();
+        this.observer = Collections.synchronizedList(new ArrayList<>());
     }
 
-    /*private void addKuchenTypes() {
-        this.kuchenTypes.put("Kremkuchen", 7);
-        this.kuchenTypes.put("Obstkuchen", 7);
-        this.kuchenTypes.put("Obsttorte", 8);
+    public synchronized void addObserver(Observer observer){
+        if(observer == null) throw new NullPointerException("observer is null");
+        this.observer.add(observer);
     }
 
-    public Map<String, Integer> getKuchenTypes() {
-        return this.kuchenTypes;
-    }*/
+    // removeObserver() ?
 
+    private void notifyObservers(){
+        for (Observer o: observer){
+            o.update();
+        }
+    }
 
     public synchronized boolean addKuchen(AbstractKuchen kuchen) {
         if (kuchen == null) throw new NullPointerException("kuchen is null");
@@ -57,6 +59,7 @@ public class Automat implements ObservableAutomat {
                 this.incrementAllergene(kuchen);
                 kuchen.setFachnummer(i);
                 kuchen.setEinfuegedatum(new Date());
+                this.notifyObservers();
                 success = true;
             }
             i++;
@@ -83,6 +86,7 @@ public class Automat implements ObservableAutomat {
         AbstractKuchen result = kuchenByFach.get(fachnummer);
         kuchenByFach.remove(fachnummer);
         this.decrementAllergene(result);
+        this.notifyObservers();
         return result;
     }
 
@@ -95,8 +99,14 @@ public class Automat implements ObservableAutomat {
         return list;
     }
 
+
     public Map<Integer, AbstractKuchen> getAlleKuchenMap() {
         return kuchenByFach;
+    }
+
+    @Override
+    public int getNumberOfKuchen(){
+        return kuchenByFach.size();
     }
 
     /**
@@ -139,7 +149,7 @@ public class Automat implements ObservableAutomat {
         return hersteller.entrySet();
     }
 
-
+    @Override
     public List<Allergen> getVorhandeneAllergeneList() {
         List<Allergen> vorhandeAllergene = new ArrayList<>();
         for (Allergen a : Allergen.values()) {
@@ -148,6 +158,7 @@ public class Automat implements ObservableAutomat {
         return vorhandeAllergene;
     }
 
+    @Override
     public List<Allergen> getNichtVorhandeneAllergeneList() {
         List<Allergen> nichtVorhandeAllergene = new ArrayList<>();
         for (Allergen a : Allergen.values()) {
@@ -172,6 +183,7 @@ public class Automat implements ObservableAutomat {
         return true;
     }
 
+    @Override
     public int getKapazitaet() {
         return kapazitaet;
     }

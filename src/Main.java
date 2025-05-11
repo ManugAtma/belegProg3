@@ -1,6 +1,10 @@
 import automat.*;
 import kuchen.Allergen;
 import kuchen.Kuchen;
+import observe.ObservableAutomat;
+import observe.Observer;
+import observer.ObserverAllergene;
+import observer.ObserverKapazitaet;
 import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
@@ -156,12 +160,47 @@ public class Main {
             System.out.println("Invalid input");
         }*/
 
-        String input = "         ";
+        /*String input = "         ";
 
 
         String[] arguments = input.trim().split("\\s+");
 
-        System.out.println(arguments.length);
+        System.out.println(arguments.length);*/
 
+        Automat a = new Automat(5);
+
+        Hersteller monte = new HerstellerImpl("Monte");
+        KremkuchenImpl kremkuchen = new KremkuchenImpl(
+                new BigDecimal("4.50"),
+                monte, List.of(Allergen.Erdnuss),
+                350, Duration.ofDays(4),
+                "Vanille"
+        );
+        Hersteller ben = new HerstellerImpl("Ben");
+        ObstkuchenImpl obstkuchen = new ObstkuchenImpl(
+                new BigDecimal("5.20"),
+                ben, List.of(Allergen.Haselnuss),
+                280, Duration.ofDays(2),
+                "Erdbeere"
+        );
+
+        Observer o = new ObserverKapazitaet(a);
+        a.addObserver(o);
+
+        Observer o2 = new ObserverAllergene(a);
+        a.addObserver(o2);
+
+        a.addHersteller(monte);
+        a.addHersteller(ben);
+
+        a.addKuchen(kremkuchen);
+        a.addKuchen(obstkuchen);
+
+        a.removeKuchen(0);
+        a.removeKuchen(1);
+
+        for (int i = 0; i<5; i++){
+            a.addKuchen(kremkuchen);
+        }
     }
 }
