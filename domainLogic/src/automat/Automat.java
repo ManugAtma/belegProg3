@@ -101,7 +101,7 @@ public class Automat implements ObservableAutomat {
 
 
     public Map<Integer, AbstractKuchen> getAlleKuchenMap() {
-        return kuchenByFach;
+        return new HashMap<>(kuchenByFach);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class Automat implements ObservableAutomat {
     }
 
     public Set<Map.Entry<Hersteller, Integer>> getAlleHersteller() {
-        return hersteller.entrySet();
+        return new HashMap<>(hersteller).entrySet();
     }
 
     @Override
@@ -173,7 +173,7 @@ public class Automat implements ObservableAutomat {
      * @return Map which is always of size 4
      */
     public Map<Allergen, Integer> getAlleAllergeneMap() {
-        return this.allergene;
+        return new EnumMap<>(this.allergene);
     }
 
     public synchronized boolean setInspektionsdatum(int fachnummer, Date datum) {
