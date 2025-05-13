@@ -8,8 +8,8 @@ import java.time.Duration;
 import java.util.Collection;
 
 
-public class ObsttorteImpl extends AbstractKuchen implements Obsttorte {
-    private String obstsorte;
+public class ObsttorteImpl extends ObstkuchenImpl implements Obsttorte {
+    private  String obstsorte;
     private String kremsorte;
 
 
@@ -18,12 +18,12 @@ public class ObsttorteImpl extends AbstractKuchen implements Obsttorte {
                          Collection<Allergen> allergene, int naehrwert, Duration haltbarkeit,
                          String kremsorte, String obstsorte) {
         super(preis, hersteller,
-                allergene, naehrwert, haltbarkeit
+                allergene, naehrwert,
+                haltbarkeit, obstsorte
         );
-        if (kremsorte == null || obstsorte == null) throw new NullPointerException("krem- oder obstsorte sind null");
-        if (kremsorte.isEmpty() || obstsorte.isEmpty()) throw new IllegalArgumentException("krem- oder obstsorte sind empty");
+        if (kremsorte == null) throw new NullPointerException("kremsorte is null");
+        if (kremsorte.isEmpty()) throw new IllegalArgumentException("kremsorte is empty");
         this.kremsorte = kremsorte;
-        this.obstsorte = obstsorte;
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public class ObstkuchenImpl extends AbstractKuchen implements Obstkuchen {
 
-    private String obstsorte;
+    private final String obstsorte;
 
     public ObstkuchenImpl(BigDecimal preis, Hersteller hersteller,
                           Collection<Allergen> allergene, int naehrwert,
