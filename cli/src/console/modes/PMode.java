@@ -2,10 +2,9 @@ package console.modes;
 
 import console.Command;
 import console.Operator;
-import console.contract.InputMode;
-import event.contract.CLIEvent;
-import event.events.LoadEvent;
-import event.events.SaveEvent;
+import event.cli.contract.CLIEvent;
+import event.cli.events.LoadEvent;
+import event.cli.events.SaveEvent;
 
 public class PMode extends AbstractInputMode {
 

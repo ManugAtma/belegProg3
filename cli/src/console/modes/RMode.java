@@ -3,10 +3,10 @@ package console.modes;
 import console.Command;
 import console.Operator;
 import console.contract.InputMode;
-import event.contract.CLIEvent;
-import event.events.GetAllergeneEvent;
-import event.events.GetHerstellerEvent;
-import event.events.GetKuchenEvent;
+import event.cli.contract.CLIEvent;
+import event.cli.events.GetAllergeneEvent;
+import event.cli.events.GetHerstellerEvent;
+import event.cli.events.GetKuchenEvent;
 
 public class RMode extends AbstractInputMode {
 

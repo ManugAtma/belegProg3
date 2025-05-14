@@ -1,20 +1,23 @@
 package startapp;
 
 import automat.Automat;
+import automat.HerstellerImpl;
+import cli.AddKuchenListener;
 import console.Operator;
 import console.contract.Console;
 import console.ConsoleImpl;
-import event.handlers.*;
-import observe.ObservableAutomat;
+import event.cli.events.AddKuchenEvent;
+import event.cli.handlers.*;
 
 public class Main {
     public static void main(String[] args) {
 
         // enter kapazitaet als run config, siehe Anforderungen
-        ObservableAutomat a = new Automat(3);
+        Automat a = new Automat(3);
+        a.addHersteller(new HerstellerImpl("Bob"));
         Console c = new ConsoleImpl(a);
-        c.setHandler(Operator.ADD_HERSTELLER, new AddHerstellerHandler());
-        c.setHandler(Operator.ADD_KUCHEN, new AddKuchenHandler());
+        //c.setHandler(Operator.ADD_HERSTELLER, new AddHerstellerHandler());
+        c.setHandler(Operator.ADD_KUCHEN, new AddKuchenHandler(new AddKuchenListener(a)));
         c.setHandler(Operator.GET_HERSTELLER, new GetHerstellerHandler());
         c.setHandler(Operator.GET_ALLERGENE, new GetAllergeneHandler());
         c.setHandler(Operator.GET_KUCHEN, new GetKuchenHandler());

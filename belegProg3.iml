@@ -15,5 +15,6 @@
     <orderEntry type="module" module-name="net" />
     <orderEntry type="module" module-name="sim" />
     <orderEntry type="library" scope="TEST" name="mockito.core" level="project" />
+    <orderEntry type="module" module-name="ioc" />
   </component>
 </module>

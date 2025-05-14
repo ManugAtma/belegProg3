@@ -1,8 +1,6 @@
 import automat.*;
 import kuchen.Allergen;
-import kuchen.Kuchen;
-import observe.ObservableAutomat;
-import observe.Observer;
+import observe.contract.Observer;
 import observer.ObserverAllergene;
 import observer.ObserverKapazitaet;
 import verwaltung.Hersteller;
@@ -10,7 +8,6 @@ import verwaltung.Hersteller;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -167,7 +164,7 @@ public class Main {
 
         System.out.println(arguments.length);*/
 
-        Automat a = new Automat(5);
+       /* Automat a = new Automat(5);
 
         Hersteller monte = new HerstellerImpl("Monte");
         KremkuchenImpl kremkuchen = new KremkuchenImpl(
@@ -182,9 +179,9 @@ public class Main {
                 ben, List.of(Allergen.Haselnuss),
                 280, Duration.ofDays(2),
                 "Erdbeere"
-        );
+        );*/
 
-        Observer o = new ObserverKapazitaet(a);
+       /* Observer o = new ObserverKapazitaet(a);
         a.addObserver(o);
 
         Observer o2 = new ObserverAllergene(a);
@@ -202,5 +199,7 @@ public class Main {
         for (int i = 0; i<5; i++){
             a.addKuchen(kremkuchen);
         }
+
+        ObstkuchenImpl copy = obstkuchen;*/
     }
 }

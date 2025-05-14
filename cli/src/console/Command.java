@@ -1,6 +1,6 @@
 package console;
 
-import event.contract.CLIEvent;
+import event.cli.contract.CLIEvent;
 
 public class Command {
     private Operator operator;

@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.util.Collection;
 
 
-public class KremkuchenImpl extends AbstractKuchen implements Kremkuchen {
+class KremkuchenImpl extends AbstractKuchen implements Kremkuchen {
     private String kremsorte;
 
     // hier inspektionsdatum = einfuegedatum setzen?

@@ -12,5 +12,7 @@
     <orderEntry type="module" module-name="domainLogic" />
     <orderEntry type="module" module-name="io" />
     <orderEntry type="module" module-name="net" />
+    <orderEntry type="module" module-name="ioc" />
+    <orderEntry type="module" module-name="listeners" />
   </component>
 </module>

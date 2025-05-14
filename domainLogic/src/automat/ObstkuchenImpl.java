@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.util.Collection;
 
 
-public class ObstkuchenImpl extends AbstractKuchen implements Obstkuchen {
+class ObstkuchenImpl extends AbstractKuchen implements Obstkuchen {
 
     private final String obstsorte;
 

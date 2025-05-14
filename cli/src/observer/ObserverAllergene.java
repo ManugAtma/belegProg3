@@ -1,8 +1,8 @@
 package observer;
 
 import kuchen.Allergen;
-import observe.ObservableAutomat;
-import observe.Observer;
+import observe.contract.ObservableAutomat;
+import observe.contract.Observer;
 
 import java.util.List;
 

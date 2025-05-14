@@ -3,9 +3,9 @@ package console;
 import console.contract.Console;
 import console.modes.CMode;
 import console.contract.InputMode;
-import event.contract.CLIEvent;
-import event.contract.CLIHandler;
-import observe.ObservableAutomat;
+import event.cli.contract.CLIEvent;
+import event.cli.contract.CLIHandler;
+import observe.contract.ObservableAutomat;
 
 import java.util.Map;
 import java.util.Scanner;

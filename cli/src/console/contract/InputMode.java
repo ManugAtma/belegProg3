@@ -9,6 +9,7 @@ public interface InputMode {
 
     Command parseCommand(String input);
 
+    // TODO: return copy?
     static Map<String, Integer> getKuchenTypes(){
         Map<String, Integer> map = new ConcurrentHashMap<>();
         map.put("Kremkuchen", 7);

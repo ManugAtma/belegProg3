@@ -2,9 +2,8 @@ package console.modes;
 
 import console.Command;
 import console.Operator;
-import console.contract.InputMode;
-import event.contract.CLIEvent;
-import event.events.SetFachnummerEvent;
+import event.cli.contract.CLIEvent;
+import event.cli.events.SetFachnummerEvent;
 
 public class UMode extends AbstractInputMode {
 

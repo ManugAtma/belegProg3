@@ -2,10 +2,9 @@ package console.modes;
 
 import console.Command;
 import console.Operator;
-import console.contract.InputMode;
-import event.contract.CLIEvent;
-import event.events.RemoveHerstellerEvent;
-import event.events.RemoveKuchenEvent;
+import event.cli.contract.CLIEvent;
+import event.cli.events.RemoveHerstellerEvent;
+import event.cli.events.RemoveKuchenEvent;
 
 public class DMode extends AbstractInputMode {
 

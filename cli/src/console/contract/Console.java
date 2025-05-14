@@ -1,7 +1,7 @@
 package console.contract;
 
 import console.Operator;
-import event.contract.CLIHandler;
+import event.cli.contract.CLIHandler;
 
 public interface Console {
 

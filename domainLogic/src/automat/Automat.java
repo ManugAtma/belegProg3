@@ -1,10 +1,12 @@
 package automat;
 
 import kuchen.Allergen;
-import observe.ObservableAutomat;
+import observe.contract.ObservableAutomat;
 import verwaltung.Hersteller;
-import observe.Observer;
+import observe.contract.Observer;
 
+import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,6 +24,7 @@ public class Automat implements ObservableAutomat {
     private final List<Observer> observer;
 
 
+
     public Automat(int kapazitaet) {
         if (kapazitaet < 1) throw new IllegalArgumentException("Kapazitaet < 1 ist unzulaessig.");
         this.kapazitaet = kapazitaet;
@@ -32,30 +35,42 @@ public class Automat implements ObservableAutomat {
         this.observer = Collections.synchronizedList(new ArrayList<>());
     }
 
-    public synchronized void addObserver(Observer observer){
-        if(observer == null) throw new NullPointerException("observer is null");
+    public synchronized void addObserver(Observer observer) {
+        if (observer == null) throw new NullPointerException("observer is null");
         this.observer.add(observer);
     }
 
     // removeObserver() ?
 
-    private void notifyObservers(){
-        for (Observer o: observer){
+    private void notifyObservers() {
+        for (Observer o : observer) {
             o.update();
         }
     }
 
-    public synchronized boolean addKuchen(AbstractKuchen kuchen) {
-        if (kuchen == null) throw new NullPointerException("kuchen is null");
-        Hersteller dieserHersteller = kuchen.getHersteller();
-        if (!hersteller.containsKey(dieserHersteller) || kuchenByFach.size() >= kapazitaet) return false;
+    public synchronized boolean addKuchen(String type, BigDecimal preis, Hersteller hersteller, Collection<Allergen> allergene,
+                                          int naehrwert, Duration haltbarkeit, String sorte1, String sorte2) {
+
+        if (type == null || preis == null || hersteller == null
+                || allergene == null || haltbarkeit == null
+                || sorte1 == null) throw new NullPointerException("an arguments is null");
+
+        if (!this.hersteller.containsKey(hersteller) || kuchenByFach.size() >= kapazitaet) return false;
+
+        AbstractKuchen kuchen = switch (type) {
+            case "Kremkuchen" -> new KremkuchenImpl(preis, hersteller, allergene, naehrwert, haltbarkeit, sorte1);
+            case "Obstkuchen" -> new ObstkuchenImpl(preis, hersteller, allergene, naehrwert, haltbarkeit, sorte1);
+            case "Obsttorte" -> new ObsttorteImpl(preis, hersteller, allergene, naehrwert, haltbarkeit, sorte1, sorte2);
+            default -> null;
+        };
+        if (kuchen == null) throw new IllegalArgumentException("kuchen type not supported");
 
         boolean success = false;
         int i = 0;
         while (i < kapazitaet && !success) {
             if (kuchenByFach.get(i) == null) {
                 kuchenByFach.put(i, kuchen);
-                hersteller.put(dieserHersteller, hersteller.get(dieserHersteller) + 1);
+                this.hersteller.put(hersteller, this.hersteller.get(hersteller) + 1);
                 this.incrementAllergene(kuchen);
                 kuchen.setFachnummer(i);
                 kuchen.setEinfuegedatum(new Date());
@@ -64,6 +79,7 @@ public class Automat implements ObservableAutomat {
             }
             i++;
         }
+        System.out.println("MODEL: Kuchen added");
         return success;
     }
 
@@ -105,7 +121,7 @@ public class Automat implements ObservableAutomat {
     }
 
     @Override
-    public int getNumberOfKuchen(){
+    public int getNumberOfKuchen() {
         return kuchenByFach.size();
     }
 

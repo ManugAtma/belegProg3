@@ -4,9 +4,9 @@ import automat.*;
 import console.Command;
 import console.Operator;
 import console.contract.InputMode;
-import event.contract.CLIEvent;
-import event.events.AddHerstellerEvent;
-import event.events.AddKuchenEvent;
+import event.cli.contract.CLIEvent;
+import event.cli.events.AddHerstellerEvent;
+import event.cli.events.AddKuchenEvent;
 import kuchen.Allergen;
 import verwaltung.Hersteller;
 
@@ -70,41 +70,20 @@ public class CMode extends AbstractInputMode {
         Collection<Allergen> allergene = this.parseAllergene(args[5]);
         if (allergene == null) return null;
 
-        String sorte1 = this.parseLetterOnlyString(args[6], "kremsorte or obstsorte"); // obstsorte or kremsorte
+        String sorte1 = this.parseLetterOnlyString(args[6], "kremsorte or obstsorte");
         if (sorte1 == null) return null;
 
-        AbstractKuchen kuchen = null;
-        switch (args[0]) {
-            case "Kremkuchen":
-                kuchen = new KremkuchenImpl(
-                        preis, hersteller, allergene,
-                        naerhwert, haltbarkeit, sorte1
-                );
-                break;
-            case "Obstkuchen":
-                kuchen = new ObstkuchenImpl(
-                        preis, hersteller, allergene,
-                        naerhwert, haltbarkeit, sorte1
-                );
-                break;
-            case "Obsttorte":
-                String obstsorte = this.parseLetterOnlyString(args[7], "obstsorte");
-                if (obstsorte == null) return null;
-
-                kuchen = new ObsttorteImpl(
-                        preis, hersteller, allergene,
-                        naerhwert, haltbarkeit, sorte1, obstsorte
-                );
-                break;
-            default:
-                System.out.println("something went wrong");
+        String obstsorte = null; // here obstsorte is of Obsttorte instance
+        if (args[0].equals("Obsttorte")) {
+            obstsorte = this.parseLetterOnlyString(args[7], "obstsorte");
+            if (obstsorte == null) return null;
         }
 
-        CLIEvent event = new AddKuchenEvent(kuchen);
+        CLIEvent event = new AddKuchenEvent(args[0], preis, hersteller,
+                allergene, naerhwert, haltbarkeit, sorte1, obstsorte);
+
         return new Command(Operator.ADD_KUCHEN, event);
     }
-
-
 
 
     private BigDecimal parsePreis(String input) {
@@ -123,9 +102,9 @@ public class CMode extends AbstractInputMode {
         return new BigDecimal(d);
     }
 
-    private Collection<Allergen> parseAllergene(String input){
+    private Collection<Allergen> parseAllergene(String input) {
         Collection<Allergen> allergene = new ArrayList<>();
-        for (String s: input.split(",")) {
+        for (String s : input.split(",")) {
             switch (s) {
                 case "Gluten":
                     allergene.add(Allergen.Gluten);
