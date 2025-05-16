@@ -233,7 +233,7 @@ public class TestAutomatFunctionality {
     }
 
 
-// getAlleKuchenList und getAlleKuchenOfType
+// getAlleKuchenList und getAlleKuchen
 
     @Test
     public void shouldReturnListOfAddedKuchenOfSizeOne() {
@@ -293,17 +293,17 @@ public class TestAutomatFunctionality {
         automat.addKuchen(obsttorte);
         automat.addKuchen(kremkuchen);
 
-        assertEquals(1, automat.getAlleKuchenOfType("Kremkuchen").size());
+        assertEquals(1, automat.getAlleKuchen("Kremkuchen").size());
     }
 
     @Test
     public void shouldThrowNPEBecauseTypeIsNull() {
-        assertThrows(NullPointerException.class, () -> automat.getAlleKuchenOfType(null));
+        assertThrows(NullPointerException.class, () -> automat.getAlleKuchen(null));
     }
 
     @Test
     public void shouldThrowIllegalArgumentBecauseTypeIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> automat.getAlleKuchenOfType(""));
+        assertThrows(IllegalArgumentException.class, () -> automat.getAlleKuchen(""));
     }
 
     @Test

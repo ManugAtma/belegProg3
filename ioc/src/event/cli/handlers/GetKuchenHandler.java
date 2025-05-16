@@ -1,12 +1,11 @@
 package event.cli.handlers;
 
-import event.cli.contract.CLIEvent;
-import event.cli.contract.CLIHandler;
+import event.cli.contract.CLIListener;
+import event.cli.events.GetKuchenEvent;
 
-public class GetKuchenHandler implements CLIHandler {
+public class GetKuchenHandler extends AbstractCLIHandler<GetKuchenEvent> {
 
-    @Override
-    public void handle(CLIEvent e) {
-        System.out.println("handling GetKuchenEvent: " + e);
-    }
+   public GetKuchenHandler(CLIListener<GetKuchenEvent> listener) {
+       super(listener);
+   }
 }

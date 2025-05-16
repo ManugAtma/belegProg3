@@ -2,11 +2,12 @@ package event.cli.handlers;
 
 import event.cli.contract.CLIEvent;
 import event.cli.contract.CLIHandler;
+import event.cli.contract.CLIListener;
+import event.cli.events.GetAllergeneEvent;
 
-public class GetAllergeneHandler implements CLIHandler {
+public class GetAllergeneHandler extends AbstractCLIHandler<GetAllergeneEvent> {
 
-    @Override
-    public void handle(CLIEvent e) {
-        System.out.println("handling GetAllergeneEvent: " + e);
+    public GetAllergeneHandler(CLIListener<GetAllergeneEvent> listener) {
+        super(listener);
     }
 }

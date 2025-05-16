@@ -1,6 +1,6 @@
 package event.cli.events;
 
-public class GetAllergeneEvent extends OneAttributeEvent<Boolean> {
+public class GetAllergeneEvent extends AbstractCLIEvent<Boolean> {
 
     public GetAllergeneEvent(boolean enthalten){
        super(enthalten);

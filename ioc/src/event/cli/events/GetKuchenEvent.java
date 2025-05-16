@@ -4,7 +4,7 @@ import event.cli.contract.CLIEvent;
 
 
 public class GetKuchenEvent implements CLIEvent {
-    String kuchenType;
+    private final String kuchenType;
 
     public GetKuchenEvent(String kuchenType){
         this.kuchenType = kuchenType; // no check for NPE, null means no type specified by user

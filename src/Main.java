@@ -7,6 +7,8 @@ import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Main {
@@ -201,5 +203,9 @@ public class Main {
         }
 
         ObstkuchenImpl copy = obstkuchen;*/
+
+        Collection<Allergen> allergens = new ArrayList<>();
+        allergens.add(Allergen.Erdnuss);
+        System.out.println(allergens);
     }
 }

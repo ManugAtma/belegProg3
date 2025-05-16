@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Date;
 
 
-abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
+public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
 
     private BigDecimal preis;
     private Date inspektionsdatum;

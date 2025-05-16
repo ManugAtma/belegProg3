@@ -1,6 +1,7 @@
 package automat;
 
 import kuchen.Allergen;
+import kuchen.Kuchen;
 import observe.contract.ObservableAutomat;
 import verwaltung.Hersteller;
 import observe.contract.Observer;
@@ -106,37 +107,24 @@ public class Automat implements ObservableAutomat {
         return result;
     }
 
-    public List<AbstractKuchen> getAlleKuchenList() {
-        Collection<AbstractKuchen> col = kuchenByFach.values();
-        List<AbstractKuchen> list = new ArrayList<>();
-        for (AbstractKuchen k : col) {
-            if (k != null) list.add(k);
-        }
-        return list;
-    }
-
-
-    public Map<Integer, AbstractKuchen> getAlleKuchenMap() {
-        return new HashMap<>(kuchenByFach);
-    }
-
-    @Override
-    public int getNumberOfKuchen() {
-        return kuchenByFach.size();
-    }
 
     /**
-     * Gets a List of Kuchen by specified type
+     * Gets a List of all Kuchen or only of specified type
      *
      * @param type the interface type of the Kuchen, so without "Impl"
-     * @return List of Kuchen by specified type
+     * @param filterByType true if kuchen should be filtered by type, false otherwise
+     * @return List of all Kuchen or only of specified type
      * @throws NullPointerException,IllegalArgumentException when type is null or empty
      */
-    public List<AbstractKuchen> getAlleKuchenOfType(String type) {
+    public List<Kuchen> getAlleKuchen(String type, boolean filterByType) {
+
+        if(!filterByType) return List.copyOf(kuchenByFach.values());
+
         if (type == null) throw new NullPointerException("type ist null");
         if (type.isEmpty()) throw new IllegalArgumentException("type ist empty");
+
         Collection<AbstractKuchen> col = kuchenByFach.values();
-        List<AbstractKuchen> list = new ArrayList<>();
+        List<Kuchen> list = new ArrayList<>();
         for (AbstractKuchen k : col) {
             if (k != null && k.getClass().getSimpleName()
                     .substring(0, k.getClass().getSimpleName().length() - 4)
@@ -146,6 +134,23 @@ public class Automat implements ObservableAutomat {
         return list;
     }
 
+   /* public List<AbstractKuchen> getAlleKuchenList() {
+        Collection<AbstractKuchen> col = kuchenByFach.values();
+        List<AbstractKuchen> list = new ArrayList<>();
+        for (AbstractKuchen k : col) {
+            if (k != null) list.add(k);
+        }
+        return list;
+    }*/
+
+    /*public Map<Integer, AbstractKuchen> getAlleKuchenMap() {
+        return new HashMap<>(kuchenByFach);
+    }*/
+
+    @Override
+    public int getNumberOfKuchen() {
+        return kuchenByFach.size();
+    }
 
     public synchronized boolean addHersteller(Hersteller h) {
         if (h == null) throw new NullPointerException("Hersteller ist null");
