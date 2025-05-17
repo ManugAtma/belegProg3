@@ -1,8 +1,8 @@
 package automat;
 
 import kuchen.Allergen;
-import observe.contract.ObservableAutomat;
-import observe.contract.Observer;
+import observe.ObservableAutomat;
+import observe.Observer;
 import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
@@ -39,7 +39,10 @@ public class Automat implements ObservableAutomat {
         this.observer.add(observer);
     }
 
-    // removeObserver() ?
+    public synchronized void removeObserver(Observer observer) {
+        if (observer == null) throw new NullPointerException("observer is null");
+        this.observer.remove(observer);
+    }
 
     private void notifyObservers() {
         for (Observer o : observer) {

@@ -5,7 +5,7 @@ import console.contract.InputMode;
 import console.modes.*;
 import event.cli.events.*;
 import event.cli.handlers.*;
-import observe.contract.ObservableAutomat;
+import observe.ObservableAutomat;
 
 import java.util.Scanner;
 
@@ -79,7 +79,7 @@ public class ConsoleImpl implements Console {
                         System.out.println("exiting...");
                         System.exit(0);
                     default:
-                        System.out.println("no such mode available"); // list available modes?
+                        System.out.println("no such mode available. available modes are :c  :r  :u  :d  :p  and :x to exit");
                 }
             }
 

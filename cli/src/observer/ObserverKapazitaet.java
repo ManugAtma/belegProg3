@@ -1,7 +1,7 @@
 package observer;
 
-import observe.contract.ObservableAutomat;
-import observe.contract.Observer;
+import observe.ObservableAutomat;
+import observe.Observer;
 
 public class ObserverKapazitaet implements Observer {
     private final ObservableAutomat automat;
