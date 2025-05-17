@@ -5,6 +5,6 @@ import event.cli.contract.CLIHandler;
 
 public interface Console {
 
-    void setHandler(Operator operator, CLIHandler handler);
+    void setHandler(Operator operator, CLIHandler<?> handler);
     void execute();
 }

@@ -7,7 +7,7 @@ public class Command {
     private CLIEvent event;
 
     public Command(Operator operator, CLIEvent event) {
-        if (operator == null || event == null) throw new NullPointerException("Eines der Argumente ist null");
+        if (operator == null || event == null) throw new NullPointerException("an argument is null");
         this.operator = operator;
         this.event = event;
     }

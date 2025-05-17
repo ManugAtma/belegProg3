@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ConsoleImpl implements Console {
     private final ObservableAutomat model;
-    private final Map<Operator, CLIHandler> handlers = new ConcurrentHashMap<>();
+    private final Map<Operator, CLIHandler<?>> handlers = new ConcurrentHashMap<>();
     private final ModeParser modeParser = new ModeParser();
     private InputMode mode = new CMode();
 
@@ -24,7 +24,7 @@ public class ConsoleImpl implements Console {
     }
 
     @Override
-    public void setHandler(Operator operator, CLIHandler handler) {
+    public void setHandler(Operator operator, CLIHandler<?> handler) {
         if (operator == null || handler == null) throw new NullPointerException("operator or handler is null");
         handlers.put(operator, handler);
     }
@@ -50,11 +50,18 @@ public class ConsoleImpl implements Console {
             // read command
             else {
                 Command command = mode.parseCommand(input);
-                if (command != null) {
+
+                 if (command != null) {
                     CLIHandler handler = handlers.get(command.getOperator()); // NPE for missing handler?
                     CLIEvent event = command.getEvent();
                     handler.handle(event);
                 }
+
+              /*  switch(command.getOperator()){
+                    case GET_ALLERGENE:
+                        //command.
+                }*/
+
             }
         }
     }

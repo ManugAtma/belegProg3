@@ -108,4 +108,6 @@ public abstract class AbstractKuchen implements Kuchen, Verkaufsobjekt {
         if (datum == null) throw new NullPointerException("einfuegedatum kann nicht null sein");
         einfuegedatum = datum;
     }
+
+
 }

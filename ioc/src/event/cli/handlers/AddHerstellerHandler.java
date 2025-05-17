@@ -2,15 +2,11 @@ package event.cli.handlers;
 
 import event.cli.contract.CLIEvent;
 import event.cli.contract.CLIListener;
+import event.cli.events.AddHerstellerEvent;
 
-public class AddHerstellerHandler extends AbstractCLIHandler {
+public class AddHerstellerHandler extends AbstractCLIHandler<AddHerstellerEvent> {
 
-    public AddHerstellerHandler(CLIListener listener) {
+    public AddHerstellerHandler(CLIListener<AddHerstellerEvent> listener) {
         super(listener);
-    }
-
-    @Override
-    public void handle(CLIEvent e){
-        System.out.println("handling AddHerstellerEvent");
     }
 }

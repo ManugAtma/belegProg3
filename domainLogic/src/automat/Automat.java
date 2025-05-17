@@ -116,7 +116,7 @@ public class Automat implements ObservableAutomat {
      * @return List of all Kuchen or only of specified type
      * @throws NullPointerException,IllegalArgumentException when type is null or empty
      */
-    public List<Kuchen> getAlleKuchen(String type, boolean filterByType) {
+    public List<AbstractKuchen> getAlleKuchen(String type, boolean filterByType) {
 
         if(!filterByType) return List.copyOf(kuchenByFach.values());
 
@@ -124,7 +124,7 @@ public class Automat implements ObservableAutomat {
         if (type.isEmpty()) throw new IllegalArgumentException("type ist empty");
 
         Collection<AbstractKuchen> col = kuchenByFach.values();
-        List<Kuchen> list = new ArrayList<>();
+        List<AbstractKuchen> list = new ArrayList<>();
         for (AbstractKuchen k : col) {
             if (k != null && k.getClass().getSimpleName()
                     .substring(0, k.getClass().getSimpleName().length() - 4)

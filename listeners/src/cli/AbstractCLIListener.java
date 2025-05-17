@@ -11,4 +11,9 @@ public abstract class AbstractCLIListener<T extends CLIEvent> implements CLIList
         if (model == null) throw new NullPointerException("model cannot be null");
         this.model = model;
     }
+
+    @Override
+    public void onCLIEvent(T event) {
+        if (event == null) throw new NullPointerException("event is null");
+    }
 }
