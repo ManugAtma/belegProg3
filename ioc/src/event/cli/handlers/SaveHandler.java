@@ -1,13 +1,16 @@
 package event.cli.handlers;
 
-import event.cli.contract.CLIEvent;
-import event.cli.contract.CLIHandler;
+import event.cli.contract.CLIListener;
+import event.cli.events.SaveEvent;
 
-public class SaveHandler implements CLIHandler {
+public class SaveHandler extends AbstractCLIHandler<SaveEvent> {
+
+    public SaveHandler(CLIListener<SaveEvent> listener) {
+        super(listener);
+    }
 
     @Override
-    public void handle(CLIEvent e) {
+    public void handle(SaveEvent e) {
         System.out.println("handling SaveEvent: " + e);
-
     }
 }

@@ -1,6 +1,5 @@
 package event.cli.handlers;
 
-import event.cli.contract.CLIEvent;
 import event.cli.contract.CLIListener;
 import event.cli.events.AddHerstellerEvent;
 

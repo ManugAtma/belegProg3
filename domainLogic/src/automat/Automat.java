@@ -1,10 +1,9 @@
 package automat;
 
 import kuchen.Allergen;
-import kuchen.Kuchen;
 import observe.contract.ObservableAutomat;
-import verwaltung.Hersteller;
 import observe.contract.Observer;
+import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -23,7 +22,6 @@ public class Automat implements ObservableAutomat {
     private final Map<Allergen, Integer> allergene
             = new ConcurrentHashMap<>(Allergen.values().length);
     private final List<Observer> observer;
-
 
 
     public Automat(int kapazitaet) {
@@ -98,12 +96,14 @@ public class Automat implements ObservableAutomat {
         }
     }
 
-    public synchronized AbstractKuchen removeKuchen(int fachnummer) {
-        if (fachnummer >= kapazitaet || fachnummer < 0) throw new IllegalArgumentException("Ungueltige Fachnummer");
-        AbstractKuchen result = kuchenByFach.get(fachnummer);
+    public synchronized AbstractKuchen removeKuchen(int input) {
+        if (input < 0) throw new IllegalArgumentException("Ungueltige Fachnummer");
+        int fachnummer = input - 1;
+        AbstractKuchen result = kuchenByFach.get(fachnummer); // is null if fachnummer > kapazitaet
         kuchenByFach.remove(fachnummer);
         this.decrementAllergene(result);
         this.notifyObservers();
+        System.out.println("MODEL: Kuchen removed:" + result);
         return result;
     }
 
@@ -111,14 +111,14 @@ public class Automat implements ObservableAutomat {
     /**
      * Gets a List of all Kuchen or only of specified type
      *
-     * @param type the interface type of the Kuchen, so without "Impl"
+     * @param type         the interface type of the Kuchen, so without "Impl"
      * @param filterByType true if kuchen should be filtered by type, false otherwise
      * @return List of all Kuchen or only of specified type
      * @throws NullPointerException,IllegalArgumentException when type is null or empty
      */
     public List<AbstractKuchen> getAlleKuchen(String type, boolean filterByType) {
 
-        if(!filterByType) return List.copyOf(kuchenByFach.values());
+        if (!filterByType) return List.copyOf(kuchenByFach.values());
 
         if (type == null) throw new NullPointerException("type ist null");
         if (type.isEmpty()) throw new IllegalArgumentException("type ist empty");
@@ -155,14 +155,19 @@ public class Automat implements ObservableAutomat {
     public synchronized boolean addHersteller(Hersteller h) {
         if (h == null) throw new NullPointerException("Hersteller ist null");
         if (hersteller.containsKey(h)) return false;
-        else hersteller.put(h, 0);
+        else {
+            hersteller.put(h, 0);
+            System.out.println("MODEL: Hersteller added");
+        }
         return true;
     }
 
-    public synchronized Hersteller removeHersteller(Hersteller h) {
-        if (h == null) throw new NullPointerException("Hersteller ist null");
-        Hersteller result = hersteller.containsKey(h) ? h : null;
-        hersteller.remove(h);
+    public synchronized Hersteller removeHersteller(String name) {
+        if (name == null) throw new NullPointerException("name is null");
+        Hersteller newHersteller = new HerstellerImpl(name);
+        Hersteller result = hersteller.containsKey(newHersteller) ? newHersteller : null;
+        hersteller.remove(newHersteller);
+        System.out.println("MODEL: Hersteller removed: " + result);
         return result;
     }
 
@@ -201,6 +206,7 @@ public class Automat implements ObservableAutomat {
         if (datum == null) throw new NullPointerException("datum ist null");
         if (kuchenByFach.get(fachnummer) == null) return false;
         kuchenByFach.get(fachnummer).setInspektionsdatum(datum);
+        System.out.println("MODEL: Inspektionsdatum set");
         return true;
     }
 

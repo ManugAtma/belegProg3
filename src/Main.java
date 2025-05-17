@@ -1,15 +1,7 @@
-import automat.*;
 import kuchen.Allergen;
-import observe.contract.Observer;
-import observer.ObserverAllergene;
-import observer.ObserverKapazitaet;
-import verwaltung.Hersteller;
 
-import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {

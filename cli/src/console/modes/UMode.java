@@ -1,20 +1,23 @@
 package console.modes;
 
-import console.Command;
 import console.Operator;
-import event.cli.contract.CLIEvent;
-import event.cli.events.SetFachnummerEvent;
+import event.cli.events.SetInspektionsdatumEvent;
 
 public class UMode extends AbstractInputMode {
+    private SetInspektionsdatumEvent setFachnummerEvent;
 
     @Override
-    public Command parseCommand(String input) {
+    public Operator parse(String input) {
 
         if (input.trim().isEmpty()) return null;
 
         Integer i = this.parseStringToPositiveInt(input, "fachnummer");
         if (i == null) return null;
-        CLIEvent event = new SetFachnummerEvent(i);
-        return new Command(Operator.SET_FACHNUMMER, event);
+        this.setFachnummerEvent = new SetInspektionsdatumEvent(i);
+        return Operator.SET_FACHNUMMER;
+    }
+
+    public SetInspektionsdatumEvent getSetFachnummerEvent() {
+        return setFachnummerEvent;
     }
 }

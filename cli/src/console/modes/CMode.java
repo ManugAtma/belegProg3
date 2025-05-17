@@ -1,10 +1,8 @@
 package console.modes;
 
-import automat.*;
-import console.Command;
+import automat.HerstellerImpl;
 import console.Operator;
 import console.contract.InputMode;
-import event.cli.contract.CLIEvent;
 import event.cli.events.AddHerstellerEvent;
 import event.cli.events.AddKuchenEvent;
 import kuchen.Allergen;
@@ -17,9 +15,11 @@ import java.util.Collection;
 import java.util.Map;
 
 public class CMode extends AbstractInputMode {
+    private AddHerstellerEvent addHerstellerEvent;
+    private AddKuchenEvent addKuchenEvent;
 
     @Override
-    public Command parseCommand(String input) {
+    public Operator parse(String input) {
 
         if (input.trim().isEmpty()) return null;
 
@@ -28,18 +28,19 @@ public class CMode extends AbstractInputMode {
         return parseAddKuchen(args);
     }
 
-    private Command parseAddHersteller(String arg) {
+    private Operator parseAddHersteller(String arg) {
 
         String name = this.parseLetterOnlyString(arg, "hersteller");
         if (name == null) return null; // arg contains non letter char
 
         Hersteller hersteller = new HerstellerImpl(name);
-        CLIEvent event = new AddHerstellerEvent(hersteller);
-        return new Command(Operator.ADD_HERSTELLER, event);
+        AddHerstellerEvent event = new AddHerstellerEvent(hersteller);
+        this.addHerstellerEvent = event;
+        return Operator.ADD_HERSTELLER;
     }
 
 
-    private Command parseAddKuchen(String[] args) {
+    private Operator parseAddKuchen(String[] args) {
 
         Map<String, Integer> kuchenTypes = InputMode.getKuchenTypes();
         Integer numOfAttributes = kuchenTypes.get(args[0]); // returns null if kuchen type is not available
@@ -79,10 +80,12 @@ public class CMode extends AbstractInputMode {
             if (obstsorte == null) return null;
         }
 
-        CLIEvent event = new AddKuchenEvent(args[0], preis, hersteller,
+        AddKuchenEvent event = new AddKuchenEvent(args[0], preis, hersteller,
                 allergene, naerhwert, haltbarkeit, sorte1, obstsorte);
 
-        return new Command(Operator.ADD_KUCHEN, event);
+        this.addKuchenEvent = event;
+
+        return Operator.ADD_KUCHEN;
     }
 
 
@@ -124,5 +127,13 @@ public class CMode extends AbstractInputMode {
             }
         }
         return allergene;
+    }
+
+    public AddHerstellerEvent getAddHerstellerEvent() {
+        return addHerstellerEvent;
+    }
+
+    public AddKuchenEvent getAddKuchenEvent() {
+        return addKuchenEvent;
     }
 }

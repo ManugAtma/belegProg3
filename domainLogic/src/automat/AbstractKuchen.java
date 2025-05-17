@@ -4,6 +4,7 @@ import kuchen.Allergen;
 import kuchen.Kuchen;
 import verwaltung.Hersteller;
 import verwaltung.Verkaufsobjekt;
+
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;

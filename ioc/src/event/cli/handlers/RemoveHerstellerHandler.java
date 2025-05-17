@@ -1,12 +1,11 @@
 package event.cli.handlers;
 
-import event.cli.contract.CLIEvent;
-import event.cli.contract.CLIHandler;
+import event.cli.contract.CLIListener;
+import event.cli.events.RemoveHerstellerEvent;
 
-public class RemoveHerstellerHandler implements CLIHandler {
+public class RemoveHerstellerHandler extends AbstractCLIHandler<RemoveHerstellerEvent> {
 
-    @Override
-    public void handle(CLIEvent e) {
-        System.out.println("handling RemoveHerstellerEvent: " + e);
+    public RemoveHerstellerHandler(CLIListener<RemoveHerstellerEvent> listener) {
+        super(listener);
     }
 }

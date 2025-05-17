@@ -1,15 +1,15 @@
 package console.modes;
 
-import console.Command;
 import console.Operator;
-import event.cli.contract.CLIEvent;
 import event.cli.events.LoadEvent;
 import event.cli.events.SaveEvent;
 
 public class PMode extends AbstractInputMode {
+    private LoadEvent loadEvent;
+    private SaveEvent saveEvent;
 
     @Override
-    public Command parseCommand(String input) {
+    public Operator parse(String input) {
 
         if (input.trim().isEmpty()) return null;
 
@@ -26,20 +26,20 @@ public class PMode extends AbstractInputMode {
         return null;
     }
 
-    private Command parseSave(String arg) {
+    private Operator parseSave(String arg) {
         Boolean b = this.parseSecondArgument(arg);
         if (b == null) return null;
 
-        CLIEvent event = new SaveEvent(b);
-        return new Command(Operator.SAVE, event);
+        this.saveEvent = new SaveEvent(b);
+        return Operator.SAVE;
     }
 
-    private Command parseLoad(String arg) {
+    private Operator parseLoad(String arg) {
         Boolean b = this.parseSecondArgument(arg);
         if (b == null) return null;
 
-        CLIEvent event = new LoadEvent(b);
-        return new Command(Operator.LOAD, event);
+        this.loadEvent = new LoadEvent(b);
+        return Operator.LOAD;
     }
 
     private Boolean parseSecondArgument(String arg) {
@@ -52,5 +52,13 @@ public class PMode extends AbstractInputMode {
                 System.out.println("argument must be either JOS or JBP");
         }
         return null;
+    }
+
+    public LoadEvent getLoadEvent() {
+        return loadEvent;
+    }
+
+    public SaveEvent getSaveEvent() {
+        return saveEvent;
     }
 }

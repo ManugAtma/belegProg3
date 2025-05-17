@@ -2,9 +2,11 @@ package automat;
 
 import kuchen.Allergen;
 import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 

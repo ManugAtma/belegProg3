@@ -1,15 +1,15 @@
 package console.modes;
 
-import console.Command;
 import console.Operator;
-import event.cli.contract.CLIEvent;
 import event.cli.events.RemoveHerstellerEvent;
 import event.cli.events.RemoveKuchenEvent;
 
 public class DMode extends AbstractInputMode {
+    private RemoveHerstellerEvent removeHerstellerEvent;
+    private RemoveKuchenEvent removeKuchenEvent;
 
     @Override
-    public Command parseCommand(String input) {
+    public Operator parse(String input) {
 
         if (input.trim().isEmpty()) return null;
 
@@ -24,19 +24,29 @@ public class DMode extends AbstractInputMode {
         return this.parseFachnummer(args[0]);
     }
 
-    private Command parseHersteller(String arg) {
+    private Operator parseHersteller(String arg) {
 
         if (this.parseLetterOnlyString(arg, "hersteller") == null) return null;
 
-        CLIEvent event = new RemoveHerstellerEvent(arg);
-        return new Command(Operator.REMOVE_HERSTELLER, event);
+        RemoveHerstellerEvent event = new RemoveHerstellerEvent(arg);
+        this.removeHerstellerEvent = event;
+        return Operator.REMOVE_HERSTELLER;
     }
 
-    private Command parseFachnummer(String arg) {
+    private Operator parseFachnummer(String arg) {
         Integer i = this.parseStringToPositiveInt(arg, "fachnummer");
         if (i == null) return null;
 
-        CLIEvent event = new RemoveKuchenEvent(i);
-        return new Command(Operator.REMOVE_KUCHEN, event);
+        RemoveKuchenEvent event = new RemoveKuchenEvent(i);
+        this.removeKuchenEvent = event;
+        return Operator.REMOVE_KUCHEN;
+    }
+
+    public RemoveHerstellerEvent getRemoveHerstellerEvent() {
+        return removeHerstellerEvent;
+    }
+
+    public RemoveKuchenEvent getRemoveKuchenEvent() {
+        return removeKuchenEvent;
     }
 }

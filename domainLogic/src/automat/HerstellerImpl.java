@@ -1,6 +1,7 @@
 package automat;
 
 import verwaltung.Hersteller;
+
 import java.util.Objects;
 
 

@@ -1,13 +1,13 @@
 package console.contract;
 
-import console.Command;
+import console.Operator;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface InputMode {
 
-    Command parseCommand(String input);
+    Operator parse(String input);
 
     // TODO: return copy?
     static Map<String, Integer> getKuchenTypes(){

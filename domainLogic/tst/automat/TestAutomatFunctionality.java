@@ -3,18 +3,15 @@ package automat;
 import kuchen.Allergen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.mockito.Mockito;
 import verwaltung.Hersteller;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.AbstractMap;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TestAutomatFunctionality {

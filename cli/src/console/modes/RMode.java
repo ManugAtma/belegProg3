@@ -1,17 +1,19 @@
 package console.modes;
 
-import console.Command;
 import console.Operator;
 import console.contract.InputMode;
-import event.cli.contract.CLIEvent;
 import event.cli.events.GetAllergeneEvent;
 import event.cli.events.GetHerstellerEvent;
 import event.cli.events.GetKuchenEvent;
 
 public class RMode extends AbstractInputMode {
+    private GetAllergeneEvent getAllergeneEvent;
+    private GetHerstellerEvent getHerstellerEvent;
+    private GetKuchenEvent getKuchenEvent;
+
 
     @Override
-    public Command parseCommand(String input) {
+    public Operator parse(String input) {
 
         if (input.trim().isEmpty()) return null;
 
@@ -29,16 +31,17 @@ public class RMode extends AbstractInputMode {
         return null;
     }
 
-    private Command parseHersteller(String[] args) {
+    private Operator parseHersteller(String[] args) {
         if (args.length != 1) {
             System.out.println("hersteller command cannot have arguments");
             return null;
         }
-        return new Command(Operator.GET_HERSTELLER, new GetHerstellerEvent());
+        this.getHerstellerEvent = new GetHerstellerEvent();
+        return Operator.GET_HERSTELLER;
     }
 
-    private Command parseKuchen(String[] args) {
-        CLIEvent event;
+    private Operator parseKuchen(String[] args) {
+        GetKuchenEvent event;
         switch (args.length) {
             case 1:
                 event = new GetKuchenEvent(null);
@@ -54,15 +57,16 @@ public class RMode extends AbstractInputMode {
                 System.out.println("kuchen command cannot have more than 1 arguments");
                 return null;
         }
-        return new Command(Operator.GET_KUCHEN, event);
+        this.getKuchenEvent = event;
+        return Operator.GET_KUCHEN;
     }
 
-    private Command parseAllergene(String[] args) {
+    private Operator parseAllergene(String[] args) {
         if (args.length != 2) {
             System.out.println("allergene command must have exactly 1 argument");
             return null;
         }
-        CLIEvent event;
+        GetAllergeneEvent event;
 
         switch (args[1]) {
             case "i":
@@ -75,6 +79,19 @@ public class RMode extends AbstractInputMode {
                 System.out.println("argument can only be 'i' or 'e'");
                 return null;
         }
-        return new Command(Operator.GET_ALLERGENE, event);
+        this.getAllergeneEvent = event;
+        return Operator.GET_ALLERGENE;
+    }
+
+    public GetAllergeneEvent getGetAllergeneEvent() {
+        return getAllergeneEvent;
+    }
+
+    public GetHerstellerEvent getGetHerstellerEvent() {
+        return getHerstellerEvent;
+    }
+
+    public GetKuchenEvent getGetKuchenEvent() {
+        return getKuchenEvent;
     }
 }

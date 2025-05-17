@@ -7,13 +7,9 @@ import event.dto.KuchenDTO;
 import event.model.contract.ModelHandler;
 import event.model.events.OutputKuchenEvent;
 import event.model.handlers.OutputKuchenHandler;
-import kuchen.Kuchen;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class GetKuchenListener extends AbstractCLIListener<GetKuchenEvent> {
     ModelHandler<OutputKuchenEvent> handler;

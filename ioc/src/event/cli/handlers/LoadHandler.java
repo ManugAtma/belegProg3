@@ -1,12 +1,16 @@
 package event.cli.handlers;
 
-import event.cli.contract.CLIEvent;
-import event.cli.contract.CLIHandler;
+import event.cli.contract.CLIListener;
+import event.cli.events.LoadEvent;
 
-public class LoadHandler implements CLIHandler {
+public class LoadHandler extends AbstractCLIHandler<LoadEvent> {
+
+    public LoadHandler(CLIListener<LoadEvent> listener) {
+        super(listener);
+    }
 
     @Override
-    public void handle(CLIEvent e) {
+    public void handle(LoadEvent e) {
         System.out.println("handling LoadEvent: " + e);
     }
 }
